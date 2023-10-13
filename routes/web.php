@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResumeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,9 +21,9 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::get('/cv', function () {
-    return Inertia::render('CV');
-})->middleware(['auth', 'verified'])->name('cv');
+Route::get('/resumes', [ResumeController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('resumes');
 
 Route::get('/vacancies', function () {
     return Inertia::render('Vacancies');

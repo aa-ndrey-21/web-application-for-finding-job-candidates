@@ -13,10 +13,23 @@ class Resume extends Model
     
     protected $table = 'resumes';
     protected $fillable = [
+        'category_id',
+        'name',
+        'surname',
+        'age',
+        'gender',
+        'city',
+        'number',
+        'email',
+        'experience',
+        'salary',
+        'attend',
+        'employment',
+        'image',
+        'bio',
+        'opportunities',
+        'background',
     ];
-    public function user(){
-        return $this->belongsTo(Category::class, 'user_id', 'id');
-    }
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }

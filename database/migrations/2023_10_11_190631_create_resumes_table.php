@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // ->unique()
             $table->unsignedBigInteger('category_id');
             $table->string('name', 255);
             $table->string('surname', 255);
@@ -37,11 +36,9 @@ return new class extends Migration
             $table->softDeletes(); 
         });
         Schema::table('resumes', function (Blueprint $table) {
-            $table->foreign('user_id', 'resume_user_fk')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id', 'resume_category_fk')->references('id')->on('categories');
         });
         Schema::table('resumes', function (Blueprint $table) {
-            $table->index('user_id', 'resume_user_idx');
             $table->index('category_id', 'resume_category_idx');
         });;
     }

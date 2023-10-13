@@ -15,10 +15,10 @@ export default function Welcome({ auth }) {
                         </Link>
 
                         <Link
-                            href={route('cv')}
+                            href={route('resumes')}
                             
                         >
-                            CV
+                            Resumes
                         </Link>
                     </>
                     ) : (

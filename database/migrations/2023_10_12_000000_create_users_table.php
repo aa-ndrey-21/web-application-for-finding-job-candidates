@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('mode', 10);
+            $table->unsignedBigInteger('vacancy_id')->nullable()->unique();
+            $table->unsignedBigInteger('resume_id')->nullable()->unique();
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
@@ -24,6 +26,13 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();  
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('vacancy_id', 'user_vacancy_fk')->references('id')->on('vacancies')->onDelete('SET NULL');
+            $table->index('vacancy_id', 'user_vacancy_idx');
+            $table->foreign('resume_id', 'user_resume_fk')->references('id')->on('resumes')->onDelete('SET NULL');
+            $table->index('resume_id', 'user_resume_idx');
+        });;
     }
 
     /**

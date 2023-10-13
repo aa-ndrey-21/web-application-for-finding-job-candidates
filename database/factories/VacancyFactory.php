@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
 use App\Models\Category;
 
 /**
@@ -19,7 +18,6 @@ class VacancyFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::get()->random()->id,
             'category_id' => Category::get()->random()->id,
             'name' => $this->faker->company,
             'experience' => $this->faker->numberBetween(1, 10), 

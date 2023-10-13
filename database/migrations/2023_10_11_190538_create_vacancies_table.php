@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // ->unique()
             $table->unsignedBigInteger('category_id');
             $table->string('name', 255);
             $table->unsignedBigInteger('experience');
@@ -30,11 +29,7 @@ return new class extends Migration
         });
 
         Schema::table('vacancies', function (Blueprint $table) {
-            $table->foreign('user_id', 'vacancy_user_fk')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id', 'vacancy_category_fk')->references('id')->on('categories');
-        });
-        Schema::table('vacancies', function (Blueprint $table) {
-            $table->index('user_id', 'vacancy_user_idx');
             $table->index('category_id', 'vacancy_category_idx');
         });
     }

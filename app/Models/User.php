@@ -23,12 +23,20 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'mode', 
+        'vacancy_id', 
+        'resume_id', 
         'name',
         'surname',
         'email',
         'gender',
         'password',
     ];
+    public function resume(){
+        return $this->belongsTo(Resume::class, 'resume_id', 'id');
+    }
+    public function vacancy(){
+        return $this->belongsTo(Vacancy::class, 'vacancy_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

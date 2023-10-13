@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if ($user->mode === 'Employer') {
+        if ($user->mode === 'employer') {
             return redirect()->route('cv'); 
         } else {
             return redirect()->intended(RouteServiceProvider::HOME); 

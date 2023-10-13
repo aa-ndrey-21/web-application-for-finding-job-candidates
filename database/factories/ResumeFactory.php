@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
 use App\Models\Category;
 
 /**
@@ -18,17 +17,15 @@ class ResumeFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::inRandomOrder()->first();
         return [
-            'user_id' => $user->id,
             'category_id' => Category::get()->random()->id,
-            'name' => $user->name,
-            'surname' => $user->surname,
+            'name' => fake()->name(),
+            'surname' => fake()->lastName(),
             'age' => $this->faker->numberBetween(18, 70),
-            'gender' => $user->gender,
+            'gender' => $this->faker->randomElement(['male', 'female', 'other']),
             'city' => $this->faker->city,
             'number' => $this->faker->tollFreePhoneNumber(),
-            'email' => $user->email,
+            'email' => fake()->unique()->safeEmail(),
             'experience' => $this->faker->numberBetween(1, 10), 
             'salary' => $this->faker->numberBetween(30000, 100000),
             'attend' => $this->faker->randomElement(['office', 'remote']),

@@ -1,6 +1,8 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
-export default function Vacancy({ className = '' }) {
+export default function Vacancy({ auth, className = '' }) {
+
+    const userMode = auth.user ? auth.user.mode : null;
 
     return (
         <section className={className}>
@@ -13,12 +15,21 @@ export default function Vacancy({ className = '' }) {
             </header>
 
                 <div className="flex items-center gap-4">
-                <Link
-                    href={route('vacancies')}
-                    className="font-semibold text-black-600 hover:text-gray-900 dark:text-black-400 dark:hover:text-gray focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >
-                    Vacancies
-                </Link>
+                {userMode === 'employer' ? (
+                    <Link
+                        href={route('vacancies')}
+                        className="font-semibold text-black-600 hover:text-gray-900 dark:text-black-400 dark:hover:text-gray focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    >
+                        Vacancies / {userMode}
+                    </Link>
+                ): (
+                    <Link
+                        href={route('resumes')}
+                        className="font-semibold text-black-600 hover:text-gray-900 dark:text-black-400 dark:hover:text-gray focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    >
+                        Resume / {userMode}
+                    </Link>
+                )}
                 </div>
         </section>
     );
