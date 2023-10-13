@@ -37,10 +37,9 @@ return new class extends Migration
         });
         Schema::table('resumes', function (Blueprint $table) {
             $table->foreign('category_id', 'resume_category_fk')->references('id')->on('categories');
-        });
-        Schema::table('resumes', function (Blueprint $table) {
             $table->index('category_id', 'resume_category_idx');
-        });;
+        });
+
     }
 
     /**

@@ -20,20 +20,29 @@ class DatabaseSeeder extends Seeder
         Resume::factory(15)->create();
         User::factory(30)->create();
 
-        
-        // Users get resume or vacancy id
-        // If users with some mode will be more than resumes or vacancies he is get null
         $users = User::all();
         $vacancies = Vacancy::all()->pluck('id')->toArray();
         $resumes = Resume::all()->pluck('id')->toArray();
         
         foreach ($users as $user) {
             if ($user->mode === 'worker') {
-                $resumeId = array_shift($resumes);
-                $user->resume_id = $resumeId;
+                if (!empty($resumes)) {
+                    $resumeId = array_shift($resumes);
+                    $user->resume_id = $resumeId;
+                } else {
+                    $user->mode = 'employer'; // Меняем mode на employer
+                    $vacancyId = array_shift($vacancies);
+                    $user->vacancy_id = $vacancyId;
+                }
             } elseif ($user->mode === 'employer') {
-                $vacancyId = array_shift($vacancies);
-                $user->vacancy_id = $vacancyId;
+                if (!empty($vacancies)) {
+                    $vacancyId = array_shift($vacancies);
+                    $user->vacancy_id = $vacancyId;
+                } else {
+                    $user->mode = 'worker'; // Меняем mode на worker
+                    $resumeId = array_shift($resumes);
+                    $user->resume_id = $resumeId;
+                }
             }
             $user->save();
         }
