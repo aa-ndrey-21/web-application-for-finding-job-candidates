@@ -21,12 +21,12 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('vacancies')} active={route().current('vacancies')}>
+                                <NavLink href={route('vacancy.index')} active={route().current('vacancy.index')}>
                                     Vacancies
                                 </NavLink>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('resumes')} active={route().current('resumes')}>
+                                <NavLink href={route('resume.index')} active={route().current('resume.index')}>
                                     Resumes
                                 </NavLink>
                             </div>
@@ -97,12 +97,12 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('vacancies')} active={route().current('vacancies')}>
+                        <ResponsiveNavLink href={route('vacancy.index')} active={route().current('vacancy.index')}>
                             Vacancies
                         </ResponsiveNavLink>
                     </div>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('resumes')} active={route().current('resumes')}>
+                        <ResponsiveNavLink href={route('resume.index')} active={route().current('resume.index')}>
                             Resumes
                         </ResponsiveNavLink>
                     </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\VacancyController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,14 +22,15 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::get('/resumes', [ResumeController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('resumes');
-
-Route::get('/vacancies', function () {
-    return Inertia::render('Vacancies');
-})->middleware(['auth', 'verified'])->name('vacancies');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/vacancy', [VacancyController::class, 'index'])->name('vacancy.index');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
+    Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
+    Route::post('/resume/create', [ResumeController::class, 'store'])->name('resume.store');
+    Route::get('/resume/{resume}', [ResumeController::class, 'show'])->name('resume.show');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
                     $resumeId = array_shift($resumes);
                     $user->resume_id = $resumeId;
                 } else {
-                    $user->mode = 'employer'; // Меняем mode на employer
+                    $user->mode = 'employer'; 
                     $vacancyId = array_shift($vacancies);
                     $user->vacancy_id = $vacancyId;
                 }
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
                     $vacancyId = array_shift($vacancies);
                     $user->vacancy_id = $vacancyId;
                 } else {
-                    $user->mode = 'worker'; // Меняем mode на worker
+                    $user->mode = 'worker'; 
                     $resumeId = array_shift($resumes);
                     $user->resume_id = $resumeId;
                 }

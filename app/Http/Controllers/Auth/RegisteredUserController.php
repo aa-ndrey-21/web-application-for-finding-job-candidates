@@ -52,11 +52,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        if ($user->mode === 'employer') {
-            return redirect()->route('cv'); 
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME); 
-        }
+        return redirect()->intended(RouteServiceProvider::HOME); 
     }
 }

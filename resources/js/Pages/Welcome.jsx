@@ -9,13 +9,13 @@ export default function Welcome({ auth }) {
                     {auth.user ? (
                         <>
                         <Link
-                            href={route('vacancies')}
+                            href={route('vacancy.index')}
                         >
                             Vacancies
                         </Link>
 
                         <Link
-                            href={route('resumes')}
+                            href={route('resume.index')}
                             
                         >
                             Resumes
