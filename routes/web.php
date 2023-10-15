@@ -23,13 +23,20 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/vacancy', [VacancyController::class, 'index'])->name('vacancy.index');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
     Route::post('/resume/create', [ResumeController::class, 'store'])->name('resume.store');
     Route::get('/resume/{resume}', [ResumeController::class, 'show'])->name('resume.show');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/vacancy', [VacancyController::class, 'index'])->name('vacancy.index');
+    Route::get('/vacancy/create', [VacancyController::class, 'create'])->name('vacancy.create');
+    Route::post('/vacancy/create', [VacancyController::class, 'store'])->name('vacancy.store');
+    Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
+    Route::get('/vacancy/{vacancy}/edit', [VacancyController::class, 'edit'])->name('vacancy.edit');
+    Route::patch('/vacancy/{vacancy}', [VacancyController::class, 'update'])->name('vacancy.update');
 });
 
 Route::middleware('auth')->group(function () {

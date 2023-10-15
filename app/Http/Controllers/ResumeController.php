@@ -22,8 +22,10 @@ class ResumeController extends Controller
 
     public function show(Resume $resume)
     {
+        $category = $resume->category;
         return Inertia::render('Resume/ResumeShow', [
             'resume' => $resume,
+            'category' => $category,
         ]);
     }
 
