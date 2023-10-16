@@ -14,11 +14,19 @@ export default function MyResume({ auth, className = '' }) {
             </header>
                 <div className="flex items-center gap-4">
                     <Link
-                        href={route('resume.create')}
+                        href={auth.user.resume_id ? route('resume.edit', auth.user.resume_id) : route('resume.create')}
                         className="font-semibold text-black-600 hover:text-gray-900 dark:text-black-400 dark:hover:text-gray focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                     >
-                        My resume
+                        {auth.user.resume_id ? 'Edit resume' : 'Create resume'}
                     </Link>
+                    {auth.user.resume_id && (
+                        <Link
+                            href={route('resume.destroy', auth.user.resume_id)}
+                            className="font-semibold text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                        >
+                            Delete resume
+                        </Link>
+                    )}
                 </div>
         </section>
     );

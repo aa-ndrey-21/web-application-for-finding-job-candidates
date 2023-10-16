@@ -89,4 +89,11 @@ class ResumeController extends Controller
         
         return redirect()->intended(RouteServiceProvider::HOME); 
     }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        $resume = $request->resume();
+        $resume->delete();
+        return Redirect::to('/');
+    }
 }

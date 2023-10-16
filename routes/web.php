@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
     Route::post('/resume/create', [ResumeController::class, 'store'])->name('resume.store');
     Route::get('/resume/{resume}', [ResumeController::class, 'show'])->name('resume.show');
+    Route::get('/resume/{resume}/edit', [ResumeController::class, 'edit'])->name('resume.edit');
+    Route::patch('/resume/{resume}', [ResumeController::class, 'update'])->name('resume.update');
+    Route::delete('/resume/{resume}', [ResumeController::class, 'destroy'])->name('resume.destroy');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/vacancy', [VacancyController::class, 'index'])->name('vacancy.index');
