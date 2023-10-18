@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Resume;
 use App\Models\Category;
@@ -90,10 +91,19 @@ class ResumeController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME); 
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function edit(){
+        $categories = Category::all();
+        return Inertia::render('Resume/ResumeEdit', [
+            'categories' => $categories,
+        ]);
+    }
+
+    public function destroy(Resume $resume): RedirectResponse
     {
-        $resume = $request->resume();
         $resume->delete();
+        $user = auth()->user();
+        $user->resume_id = null;
+        $user->save();
         return Redirect::to('/');
     }
 }

@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
     Route::get('/vacancy/{vacancy}/edit', [VacancyController::class, 'edit'])->name('vacancy.edit');
     Route::patch('/vacancy/{vacancy}', [VacancyController::class, 'update'])->name('vacancy.update');
+    Route::delete('/vacancy/{vacancy}', [VacancyController::class, 'destroy'])->name('vacancy.destroy');
+
 });
 
 Route::middleware('auth')->group(function () {

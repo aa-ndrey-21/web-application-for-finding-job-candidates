@@ -1,15 +1,19 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import InputError from '@/Components/InputError';
+
 
 export default function VacancyCreate({ auth, categories}) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         experience: '',
         salary: '',
         city: '',
         attend: '',
         employment: '',
+        number: '',
+        email: auth.user.email,
         logo: '',
         description: '',
         demands: '',
@@ -51,6 +55,7 @@ export default function VacancyCreate({ auth, categories}) {
                                         <option value={category.id}>{ category.title }</option>
                                     ))}
                                 </select>
+                                <InputError message={errors.category_id} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -64,6 +69,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="name"
                                     onChange={(e) => setData('name', e.target.value)}
                                 />
+                                <InputError message={errors.name} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -77,6 +83,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="experience"
                                     onChange={(e) => setData('experience', e.target.value)}
                                 />
+                                <InputError message={errors.experience} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -90,6 +97,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="salary"
                                     onChange={(e) => setData('salary', e.target.value)}
                                 />
+                                <InputError message={errors.salary} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -103,6 +111,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="city"
                                     onChange={(e) => setData('city', e.target.value)}
                                 />
+                                <InputError message={errors.city} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -116,6 +125,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="attend"
                                     onChange={(e) => setData('attend', e.target.value)}
                                 />
+                                <InputError message={errors.attend} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -129,6 +139,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="employment"
                                     onChange={(e) => setData('employment', e.target.value)}
                                 />
+                                <InputError message={errors.employment} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -142,9 +153,9 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="logo"
                                     onChange={(e) => setData('logo', e.target.value)}
                                 />
+                                <InputError message={errors.logo} />
                             </div>
-
-                            {/* <div className="mb-2">
+                            <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
@@ -156,6 +167,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="number"
                                     onChange={(e) => setData('number', e.target.value)}
                                 />
+                                <InputError message={errors.number} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -168,9 +180,11 @@ export default function VacancyCreate({ auth, categories}) {
                                     id="email"
                                     name="email"
                                     type="email"
+                                    value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
                                 />
-                            </div> */}
+                                <InputError message={errors.email} />
+                            </div>
 
                             <div className="mb-2">
                                 <label
@@ -184,6 +198,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="description"
                                     onChange={(e) => setData('description', e.target.value)}
                                 />
+                                <InputError message={errors.description} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -197,6 +212,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="demands"
                                     onChange={(e) => setData('demands', e.target.value)}
                                 />
+                                <InputError message={errors.demands} />
                             </div>
                             <div className="mb-2">
                                 <label
@@ -210,6 +226,7 @@ export default function VacancyCreate({ auth, categories}) {
                                     name="details"
                                     onChange={(e) => setData('details', e.target.value)}
                                 />
+                                <InputError message={errors.details} />
                             </div>
                             
                             <PrimaryButton className="my-4" disabled={processing}>
