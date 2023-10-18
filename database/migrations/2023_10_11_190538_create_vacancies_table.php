@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('city', 255);
             $table->string('attend', 255);
             $table->string('employment', 255);
+            $table->string('number', 15);
+            $table->string('email', 255);
             $table->string('logo')->nullable();
             $table->text('description');
             $table->text('demands');

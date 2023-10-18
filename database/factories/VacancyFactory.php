@@ -25,6 +25,8 @@ class VacancyFactory extends Factory
             'city' => $this->faker->city,
             'attend' => $this->faker->randomElement(['office', 'remote']),
             'employment' => $this->faker->randomElement(['fullday', 'partday']),
+            'number' => $this->faker->tollFreePhoneNumber(),
+            'email' => fake()->unique()->safeEmail(),
             'logo' => $this->faker->imageUrl(),
             'description' => $this->faker->text(100),
             'demands' => $this->faker->text(100),

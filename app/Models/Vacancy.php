@@ -20,6 +20,8 @@ class Vacancy extends Model
         'salary',
         'city',
         'attend',
+        'number',
+        'email',
         'employment',
         'logo',
         'description',
