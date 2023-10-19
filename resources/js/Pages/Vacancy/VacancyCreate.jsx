@@ -230,7 +230,7 @@ export default function VacancyCreate({ auth, categories}) {
                             </div>
                             
                             <PrimaryButton className="my-4" disabled={processing}>
-                                Register
+                                Publish
                             </PrimaryButton>
                         </form>                            
                     </div>

@@ -79,11 +79,50 @@ class VacancyController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME); 
     }
 
-    public function edit(){
+    public function edit(Vacancy $vacancy){
         $categories = Category::all();
         return Inertia::render('Vacancy/VacancyEdit', [
+            'vacancy' => $vacancy,
             'categories' => $categories,
         ]);
+    }
+
+    public function update(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'experience' => 'required|integer|min:0',
+            'salary' => 'required|numeric|min:0',
+            'city' => 'required|string|max:255',
+            'attend' => 'required|string|max:255',
+            'employment' => 'required|string|max:255',
+            'number' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'description' => 'required|string',
+            'demands' => 'required|string',
+            'details' => 'nullable|string',
+        ]);
+
+        $vacancy = Vacancy::findOrFail($request->input('id'));
+        dd($vacancy);
+        $vacancy->update([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'experience' => $request->experience,
+            'salary' => $request->salary,
+            'city' => $request->city,
+            'attend' => $request->attend,
+            'employment' => $request->employment,
+            'number' => $request->number, 
+            'email' => $request->email, 
+            'logo' => $request->logo, 
+            'description' => $request->description,
+            'demands' => $request->demands,
+            'details' => $request->details,
+        ]);
+        return redirect()->intended(RouteServiceProvider::HOME); 
     }
 
     public function destroy(Vacancy $vacancy): RedirectResponse

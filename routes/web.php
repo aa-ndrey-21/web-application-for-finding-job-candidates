@@ -23,8 +23,6 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-});
-Route::middleware('auth')->group(function () {
     Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
     Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
     Route::post('/resume/create', [ResumeController::class, 'store'])->name('resume.store');

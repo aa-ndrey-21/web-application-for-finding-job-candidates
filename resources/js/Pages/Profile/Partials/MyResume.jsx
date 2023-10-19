@@ -10,7 +10,6 @@ export default function MyResume({ auth, className = '' }) {
 
     const deleteResume = (e) => {
         e.preventDefault();
-
         destroy(route('resume.destroy', resume_id));
     };
 
@@ -25,7 +24,7 @@ export default function MyResume({ auth, className = '' }) {
                 <div className="flex items-center gap-4 mt-2">
                     <Link   
                         href={auth.user.resume_id ? route('resume.edit', auth.user.resume_id) : route('resume.create')}
-                        className="font-semibold text-black-600 hover:text-gray-900 dark:text-black-400 dark:hover:text-gray focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                        className="bg-green-500 text-white hover:bg-green-600 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500"                        
                     >
                         {auth.user.resume_id ? 'Edit resume' : 'Create resume'}
                     </Link>
