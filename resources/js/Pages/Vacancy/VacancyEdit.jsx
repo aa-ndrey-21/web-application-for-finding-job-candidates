@@ -23,7 +23,7 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
 
     const submit = (e) => {
         e.preventDefault();
-        patch(route('vacancy.update'));
+        patch(route('vacancy.update', vacancy.id));
     };
     return (
         <AuthenticatedLayout

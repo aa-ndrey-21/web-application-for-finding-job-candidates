@@ -87,7 +87,7 @@ class VacancyController extends Controller
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(Request $request, Vacancy $vacancy): RedirectResponse
     {
         $request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -104,9 +104,6 @@ class VacancyController extends Controller
             'demands' => 'required|string',
             'details' => 'nullable|string',
         ]);
-
-        $vacancy = Vacancy::findOrFail($request->input('id'));
-        dd($vacancy);
         $vacancy->update([
             'category_id' => $request->category_id,
             'name' => $request->name,

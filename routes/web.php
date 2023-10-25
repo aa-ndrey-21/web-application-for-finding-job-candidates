@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,9 +19,11 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome');
+// });
+
+Route::get('/', WelcomeController::class)->name('welcome.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/resume', [ResumeController::class, 'index'])->name('resume.index');
