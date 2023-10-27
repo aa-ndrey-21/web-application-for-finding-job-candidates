@@ -7,15 +7,21 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+// Filter import
+use App\Http\Requests\Resume\FilterRequest;
+use App\Http\Filters\ResumeFilter;
+
 use Inertia\Inertia;
 use App\Models\Resume;
 use App\Models\Category;
 
 class ResumeController extends Controller
 {
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $resumes = Resume::all();
+        $data = $request->validated();
+        $filter = app()->make(ResumeFilter::class, ['queryParams' => array_filter($data)]);
+        $resumes = Resume::filter($filter)->get();
         return Inertia::render('Resume/Resumes', [
             'resumes' => $resumes,
         ]);

@@ -7,15 +7,21 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+// Filter import
+use App\Http\Requests\Vacancy\FilterRequest;
+use App\Http\Filters\VacancyFilter;
+
 use Inertia\Inertia;
 use App\Models\Vacancy;
 use App\Models\Category;
 
 class VacancyController extends Controller
 {
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $vacancies = Vacancy::all();
+        $data = $request->validated();
+        $filter = app()->make(VacancyFilter::class, ['queryParams' => array_filter($data)]);
+        $vacancies = Vacancy::filter($filter)->get();
         return Inertia::render('Vacancy/Vacancies', [
             'vacancies' => $vacancies,
         ]);
