@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ResumeController;
-use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\Resume\ResumeController;
+use App\Http\Controllers\Vacancy\VacancyController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,10 +18,6 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return Inertia::render('Welcome');
-// });
 
 Route::get('/', WelcomeController::class)->name('welcome.index');
 

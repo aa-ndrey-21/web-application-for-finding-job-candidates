@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 
 export default function Resumes({ auth, resumes }) {
     return (
@@ -15,12 +16,13 @@ export default function Resumes({ auth, resumes }) {
                         <div className="p-6 text-gray-900">
                             <h3>Resumes:</h3>
                                 <ul>
-                                    {resumes.map((resume) => (
+                                    {resumes.data.map((resume) => (
                                         <li key={resume.id}>
                                             <a href={route('resume.show', { resume: resume.id })} >{resume.id} {resume.email}</a>
                                         </li>
                                     ))}
                                 </ul>
+                            <Pagination class="mt-6" links={resumes.links} />
                         </div>
                     </div>
                 </div>

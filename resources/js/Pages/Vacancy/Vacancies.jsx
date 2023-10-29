@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
 
 export default function Vacancies({ auth, vacancies }) {
     return (
@@ -15,12 +16,13 @@ export default function Vacancies({ auth, vacancies }) {
                         <div className="p-6 text-gray-900">
                             <h3>Vacancies:</h3>
                                 <ul>
-                                    {vacancies.map((vacancy) => (
+                                    {vacancies.data.map((vacancy) => (
                                         <li key={vacancy.id}>
-                                            <a href={`/vacancy/${vacancy.id}`} >{vacancy.id} {vacancy.name}</a>
+                                            <a href={route('vacancy.show', { vacancy: vacancy.id })} >{vacancy.id} {vacancy.name}</a>
                                         </li>
                                     ))}
                                 </ul>
+                            <Pagination class="mt-6" links={vacancies.links} />
                         </div>
                     </div>
                 </div>

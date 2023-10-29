@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Resume;
+namespace App\Http\Requests\Vacancy;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,23 +24,17 @@ class StoreRequest extends FormRequest
         return [
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'age' => 'required|integer|min:16|max:135',
-            'gender' => 'required|in:male,female,other',
-            'city' => 'required|string|max:255',
-            'number' => 'required|string|max:15',
-            'email' => 'required|email|max:255',
-            'telegram' => 'nullable|string|max:255',
-            'whatsApp' => 'nullable|string|max:255',
-            'signal' => 'nullable|string|max:255',
             'experience' => 'required|integer|min:0',
             'salary' => 'required|numeric|min:0',
+            'city' => 'required|string|max:255',
             'attend' => 'required|string|max:255|in:office,remote',
+            'number' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
             'employment' => 'required|string|max:255|in:fullday,partday',
-            'image' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'bio' => 'required|string',
-            'opportunities' => 'required|string',
-            'background' => 'required|string',
+            'logo' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'description' => 'required|string',
+            'demands' => 'required|string',
+            'details' => 'nullable|string',
         ];
     }
 }

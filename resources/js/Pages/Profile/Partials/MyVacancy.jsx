@@ -10,7 +10,6 @@ export default function MyVacancy({ auth, className = '' }) {
 
     const deleteVacancy = (e) => {
         e.preventDefault();
-
         destroy(route('vacancy.destroy', vacancy_id));
     };
 
