@@ -3,6 +3,11 @@ import { Link } from '@inertiajs/react';
 
 export default function Pagination({ links }) {
 
+    if (links.length > 0) {
+        links[0].label = "Previous"; 
+        links[links.length - 1].label = "Next";
+    }
+
     function getClassName(active) {
         if(active) {
             return "mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-primary focus:text-primary bg-blue-700 text-white";

@@ -22,7 +22,7 @@ class ResumeController extends BaseController
     public function index(FilterRequest $request)
     {
         $resumes = $this->service->index($request);
-        return Inertia::render('Resume/Resumes', [
+        return Inertia::render('Resume/ResumeIndex', [
             'resumes' => $resumes,
         ]);
     }

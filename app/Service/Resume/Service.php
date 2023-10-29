@@ -12,8 +12,10 @@ class Service extends Controller
 { 
   public function index($request){
     $data = $request->validated();
+    $page = $data['page'] ?? 1;
+    $per_page = $data['per_page'] ?? 10; 
     $filter = app()->make(ResumeFilter::class, ['queryParams' => array_filter($data)]);
-    $resumes = Resume::filter($filter)->paginate(5)->withQueryString();
+    $resumes = Resume::filter($filter)->paginate($per_page, ['*'], 'page', $page)->withQueryString();
     return $resumes;
   }
 

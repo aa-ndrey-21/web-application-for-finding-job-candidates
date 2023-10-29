@@ -12,8 +12,10 @@ class Service extends Controller
 { 
   public function index($request){
     $data = $request->validated();
+    $page = $data['page'] ?? 1;
+    $per_page = $data['per_page'] ?? 10; 
     $filter = app()->make(VacancyFilter::class, ['queryParams' => array_filter($data)]);
-    $vacancies = Vacancy::filter($filter)->paginate(5)->withQueryString();
+    $vacancies = Vacancy::filter($filter)->paginate($per_page, ['*'], 'page', $page)->withQueryString();
     return $vacancies;
   }
 

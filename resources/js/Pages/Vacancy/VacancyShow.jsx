@@ -1,7 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function VacancyShow({ auth, vacancy, category }) {
+    const [details, setDetails] = useState(false);
+    const [error, setError] = useState(false);
+    const showDetails = () => {
+        if (auth.user.mode === 'worker') {
+            setDetails(!details);
+        } else {
+            setError(!error);
+        }
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -18,6 +28,17 @@ export default function VacancyShow({ auth, vacancy, category }) {
                                     <li>{vacancy.id}</li>
                                     <li>{category.title}</li>
                                 </ul>
+                                <div className='mt-2'>
+                                    <a onClick={showDetails} className="bg-green-500 hover:bg-green-600 cursor-pointer text-white font-semibold py-2 px-4 rounded">
+                                        {details ? 'Hide details' : 'Show details'} 
+                                    </a>
+                                    {details && 
+                                    <ul className='mt-2'>
+                                        <li>{vacancy.email}</li>
+                                        <li>{vacancy.number}</li>
+                                    </ul>}
+                                    {error && <div className='mt-2 text-red-600'>Login as worker to view details about this vacancy</div>}
+                                </div>
                         </div>
                     </div>
                 </div>

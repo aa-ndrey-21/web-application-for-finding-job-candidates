@@ -22,6 +22,8 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'page' => 'integer',
+            'per_page' => 'integer',
             'category_id' => 'integer',
             'name' => 'string',
             'experience' => 'integer',

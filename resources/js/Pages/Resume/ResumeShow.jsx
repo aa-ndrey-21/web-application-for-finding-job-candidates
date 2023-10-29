@@ -1,7 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function ResumeShow({ auth, resume, category }) {
+    const [details, setDetails] = useState(false);
+    const [error, setError] = useState(false);
+    const showDetails = () => {
+        if (auth.user.mode === 'employer') {
+            setDetails(!details);
+        } else {
+            setError(!error);
+        }
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -18,6 +28,19 @@ export default function ResumeShow({ auth, resume, category }) {
                                     <li>{resume.id}</li>
                                     <li>{category.title}</li>
                                 </ul>
+                                <div className='mt-2'>
+                                    <a onClick={showDetails} className="bg-green-500 hover:bg-green-600 cursor-pointer text-white font-semibold py-2 px-4 rounded">
+                                        {details ? 'Hide details' : 'Show details'} 
+                                    </a>
+                                    {details && 
+                                    <ul className='mt-2'>
+                                        <li>{resume.email}</li>
+                                        <li>{resume.number}</li>
+                                        <li>{resume.telegram}</li>
+                                        <li>{resume.whatsApp}</li>
+                                    </ul>}
+                                    {error && <div className='mt-2 text-red-600'>Login as employer to view details about this resume</div>}
+                                </div>
                         </div>
                     </div>
                 </div>
