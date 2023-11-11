@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
             'number' => 'required|string|max:15',
             'email' => 'required|email|max:255',
             'employment' => 'required|string|max:255|in:fullday,partday',
-            'logo' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,gif|max:10240',
             'description' => 'required|string',
             'demands' => 'required|string',
             'details' => 'nullable|string',

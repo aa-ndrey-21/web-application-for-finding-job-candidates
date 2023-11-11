@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Pagination from '@/Components/Pagination';
+import VacancyCard from '@/Components/VacancyCard';
 
-export default function VacancyIndex({ auth, vacancies }) {
+export default function VacancyIndex({ auth, vacancies, categories }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -12,17 +13,15 @@ export default function VacancyIndex({ auth, vacancies }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <h3>Vacancies:</h3>
-                                <ul>
+                    <div className="bg-white p-6 overflow-hidden flex shadow-sm sm:rounded-lg">
+                        <div className="text-gray-900 flex-initial w-9/12">
                                     {vacancies.data.map((vacancy) => (
-                                        <li key={vacancy.id}>
-                                            <a href={route('vacancy.show', { vacancy: vacancy.id })} >{vacancy.id} {vacancy.name}</a>
-                                        </li>
+                                        <VacancyCard key={vacancy.id} vacancy={vacancy} categories={categories} ></VacancyCard>
                                     ))}
-                                </ul>
                             <Pagination class="mt-6" links={vacancies.links} />
+                        </div>
+                        <div className="h-min w-3/12 p-4 ml-2 mt-2 border-2 border-customColor rounded-md">
+                            
                         </div>
                     </div>
                 </div>

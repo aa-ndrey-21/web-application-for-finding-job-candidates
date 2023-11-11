@@ -37,7 +37,7 @@ class StoreRequest extends FormRequest
             'salary' => 'required|numeric|min:0',
             'attend' => 'required|string|max:255|in:office,remote',
             'employment' => 'required|string|max:255|in:fullday,partday',
-            'image' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,gif|max:10240',
             'bio' => 'required|string',
             'opportunities' => 'required|string',
             'background' => 'required|string',

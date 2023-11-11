@@ -277,7 +277,8 @@ export default function ResumeCreate({ auth, categories}) {
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                                     id="image"
                                     name="image"
-                                    onChange={(e) => setData('image', e.target.value)}
+                                    type='file'
+                                    onChange={(e) => setData("image", e.target.files[0])}
                                 />
                                 <InputError message={errors.image} />
                             </div>

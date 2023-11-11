@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Vacancy;
 use App\Http\Filters\VacancyFilter;
+use Illuminate\Support\Facades\Storage;
 
 class Service extends Controller
 { 
@@ -17,6 +18,11 @@ class Service extends Controller
     $filter = app()->make(VacancyFilter::class, ['queryParams' => array_filter($data)]);
     $vacancies = Vacancy::filter($filter)->paginate($per_page, ['*'], 'page', $page)->withQueryString();
     return $vacancies;
+  }
+
+  public function getAllCategory(){
+    $categories = Category::all();
+    return $categories;
   }
 
   public function show($vacancy){
@@ -30,6 +36,10 @@ class Service extends Controller
   }
 
   public function store($data){
+    if (request('logo')){
+      $logoPath = request()->file('logo')->store('vacancy', 'public');
+      $data['logo'] = $logoPath;
+    }
     $vacancy = Vacancy::create($data);
     $user = auth()->user();
     $user->vacancy_id = $vacancy->id;
@@ -46,6 +56,7 @@ class Service extends Controller
   }
 
   public function destroy($vacancy){
+    Storage::disk('public')->delete($vacancy->logo);  
     $vacancy->delete();
     $user = auth()->user();
     $user->vacancy_id = null;

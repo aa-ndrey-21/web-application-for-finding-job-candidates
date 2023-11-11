@@ -10,7 +10,7 @@ export default function ResumeEdit({ auth, categories, resume}) {
         setData, 
         patch, 
         processing, 
-        errors 
+        errors
     } = useForm({
         category_id: resume.category_id,
         name: resume.name,
@@ -35,7 +35,28 @@ export default function ResumeEdit({ auth, categories, resume}) {
 
     const editResume = (e) => {
         e.preventDefault();
-        patch(route('resume.update', resume_id));
+        const formData = new FormData();
+        formData.append('category_id', data.category_id);
+        formData.append('name', data.surname);
+        formData.append('surname', data.name);
+        formData.append('age', data.gender);
+        formData.append('gender', data.age);
+        formData.append('city', data.number);
+        formData.append('number', data.city);
+        formData.append('email', data.email);
+        formData.append('telegram', data.telegram);
+        formData.append('whatsApp', data.whatsApp);
+        formData.append('signal', data.signal);
+        formData.append('experience', data.experience);
+        formData.append('salary', data.salary);
+        formData.append('attend', data.attend);
+        formData.append('employment', data.employment);
+        formData.append('image', data.image);
+        formData.append('bio', data.bio);
+        formData.append('opportunities', data.opportunities);
+        formData.append('background', data.background);
+        console.log(formData);
+        patch(route('resume.update', resume_id), formData);
     };
     return (
         <AuthenticatedLayout
@@ -292,10 +313,11 @@ export default function ResumeEdit({ auth, categories, resume}) {
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="image"
                                     name="image"
-                                    value={data.image}
-                                    onChange={(e) => setData('image', e.target.value)}
+                                    type='file'
+                                    // ref={register}
+                                    // value={data.image}
+                                    onChange={(e) => setData("image", e.target.files[0])}
                                 />
                                 <InputError message={errors.image} />
                             </div>

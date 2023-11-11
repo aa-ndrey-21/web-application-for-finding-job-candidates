@@ -151,7 +151,8 @@ export default function VacancyCreate({ auth, categories}) {
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                                     id="logo"
                                     name="logo"
-                                    onChange={(e) => setData('logo', e.target.value)}
+                                    type='file'
+                                    onChange={(e) => setData("logo", e.target.files[0])}
                                 />
                                 <InputError message={errors.logo} />
                             </div>

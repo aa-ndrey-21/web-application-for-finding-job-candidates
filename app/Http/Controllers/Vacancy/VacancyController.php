@@ -22,8 +22,10 @@ class VacancyController extends BaseController
     public function index(FilterRequest $request)
     {
         $vacancies = $this->service->index($request);
+        $categories = $this->service->getAllCategory();
         return Inertia::render('Vacancy/VacancyIndex', [
             'vacancies' => $vacancies,
+            'categories' => $categories,
         ]);
     }
 

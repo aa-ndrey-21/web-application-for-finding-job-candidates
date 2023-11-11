@@ -2,8 +2,9 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
+import Swiper from '@/Components/Swiper';
 
-export default function Welcome({ auth, randomResumes, randomVacancies }) {
+export default function Welcome({ auth, randomResume, randomResumes, randomVacancies }) {
     const [activeTab, setActiveTab] = useState('vacancies');
 
     return (
@@ -15,7 +16,7 @@ export default function Welcome({ auth, randomResumes, randomVacancies }) {
             >
                 <Head title="Welcome" />
                 <div className="flex justify-center items-center min-h-screen">
-                    <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                    <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden rounded-lg">
                         <div className="p-6 text-gray-900">
                             <h3>
                                 <button
@@ -60,8 +61,8 @@ export default function Welcome({ auth, randomResumes, randomVacancies }) {
             : 
             <GuestLayout>
                 <Head title="Welcome" />
-                <div className="p-6 text-gray-900">
-                    <h3>
+                <div className="p-0 sm:p-6 text-gray-900 flex flex-col sm:justify-center items-center">
+                    <h3 className='font-semibold space-x-4'>
                         <button
                             onClick={() => setActiveTab('resumes')}
                             className={`${
@@ -80,19 +81,15 @@ export default function Welcome({ auth, randomResumes, randomVacancies }) {
                         </button>
                     </h3>
                     {activeTab === 'resumes' && (
-                        <ul>
-                            {randomResumes.map((resume) => (
-                                <li key={resume.id}>
-                                    <a href={route('resume.show', { resume: resume.id })}>{resume.id} {resume.email}</a>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="h-200 w-400 flex items-center justify-center">
+                            <Swiper resume={randomResume} />
+                        </div>
                     )}
                     {activeTab === 'vacancies' && (
                         <ul>
                             {randomVacancies.map((vacancy) => (
                                 <li key={vacancy.id}>
-                                    <a href={route('vacancy.show', { vacancy: vacancy.id })}>{vacancy.id} {vacancy.name}</a>
+                                    <a href={route('vacancy.show', { vacancy: vacancy.id })}>{vacancy.id} {vacancy.name}</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis mollitia suscipit doloremque cum qui sint placeat repellat? Ducimus nobis harum delectus. Unde, culpa! Quasi eum minus dolorum, ullam inventore natus.
                                 </li>
                             ))}
                         </ul>
@@ -102,43 +99,3 @@ export default function Welcome({ auth, randomResumes, randomVacancies }) {
         </>
     );
 }
-
-
-            {/* <div>
-                <div>
-                    {auth.user ? (
-                        <>
-                        <Link
-                            href={route('vacancy.index')}
-                        >
-                            Vacancies
-                        </Link>
-
-                        <Link
-                            href={route('resume.index')}
-                            
-                        >
-                            Resumes
-                        </Link>
-                    </>
-                    ) : (
-                        <>
-                            <Link
-                                href={route('login')}
-                            >
-                                Log in
-                            </Link>
-
-                            <Link
-                                href={route('register')}
-                                
-                            >
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </div>
-            </div>
-            <div>
-                
-            </div> */}

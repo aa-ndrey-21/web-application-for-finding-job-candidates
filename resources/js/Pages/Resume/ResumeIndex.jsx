@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Pagination from '@/Components/Pagination';
+import ResumeCard from '@/Components/ResumeCard';
 
-export default function ResumeIndex({ auth, resumes }) {
+export default function ResumeIndex({ auth, resumes, categories }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -12,17 +13,15 @@ export default function ResumeIndex({ auth, resumes }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <h3>Resumes:</h3>
-                                <ul>
+                    <div className="bg-white p-6 overflow-hidden flex shadow-sm sm:rounded-lg">
+                        <div className="text-gray-900 flex-initial w-9/12">
                                     {resumes.data.map((resume) => (
-                                        <li key={resume.id}>
-                                            <a href={route('resume.show', { resume: resume.id })} >{resume.id} {resume.email}</a>
-                                        </li>
+                                        <ResumeCard key={resume.id} resume={resume} categories={categories} ></ResumeCard>
                                     ))}
-                                </ul>
                             <Pagination class="mt-6" links={resumes.links} />
+                        </div>
+                        <div className="h-min w-3/12 p-4 ml-2 mt-2 border-2 border-customColor rounded-md">
+                            
                         </div>
                     </div>
                 </div>

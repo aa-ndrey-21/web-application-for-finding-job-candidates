@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Filters\ResumeFilter;
+use Illuminate\Support\Facades\Storage;
+
 
 class Service extends Controller
 { 
@@ -17,6 +19,11 @@ class Service extends Controller
     $filter = app()->make(ResumeFilter::class, ['queryParams' => array_filter($data)]);
     $resumes = Resume::filter($filter)->paginate($per_page, ['*'], 'page', $page)->withQueryString();
     return $resumes;
+  }
+  
+  public function getAllCategory(){
+    $categories = Category::all();
+    return $categories;
   }
 
   public function show($resume){
@@ -30,6 +37,10 @@ class Service extends Controller
   }
 
   public function store($data){
+    if (request('image')){
+      $imagePath = request()->file('image')->store('resume', 'public');
+      $data['image'] = $imagePath;
+    }
     $resume = Resume::create($data);
     $user = auth()->user();
     $user->resume_id = $resume->id;
@@ -46,6 +57,7 @@ class Service extends Controller
   }
 
   public function destroy($resume){
+    Storage::disk('public')->delete($resume->image);  
     $resume->delete();
     $user = auth()->user();
     $user->resume_id = null;
