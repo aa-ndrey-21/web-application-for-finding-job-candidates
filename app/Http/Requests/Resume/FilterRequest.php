@@ -32,7 +32,7 @@ class FilterRequest extends FormRequest
             'salary' => 'string',
             'attend' => 'string',
             'employment' => 'string',
-            'image' => 'nullable|string',
+            'image' => 'string',
             'opportunities' => 'string',
         ];
     }

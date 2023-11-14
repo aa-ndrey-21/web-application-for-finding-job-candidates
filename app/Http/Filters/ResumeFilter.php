@@ -43,13 +43,18 @@ class ResumeFilter extends AbstractFilter
     public function age(Builder $builder, $value)
     {
         $ageRange = explode('-', $value);
-        if (count($ageRange) == 2) {
+    
+        if (count($ageRange) == 2 && $ageRange[0] !== '' && $ageRange[1] !== '') {
             $minAge = (int) $ageRange[0];
             $maxAge = (int) $ageRange[1];
             $builder->whereBetween('age', [$minAge, $maxAge]);
-        }elseif (count($ageRange) == 1) {
-            $builder->where('age', $value);
-        }else{
+        }elseif (substr($value, -1) === '-') {
+            $minAge = (int) rtrim($value, '-');
+            $builder->where('age', '>', $minAge);
+        }elseif (substr($value, 0, 1) === '-') {
+            $maxAge = (int) substr($value, 1);
+            $builder->where('age', '<=', $maxAge);
+        } else {
             abort(404);
         }
     }
@@ -72,13 +77,18 @@ class ResumeFilter extends AbstractFilter
     public function salary(Builder $builder, $value)
     {
         $salaryRange = explode('-', $value);
-        if (count($salaryRange) == 2) {
+    
+        if (count($salaryRange) == 2 && $salaryRange[0] !== '' && $salaryRange[1] !== '') {
             $minSalary = (int) $salaryRange[0];
             $maxSalary = (int) $salaryRange[1];
             $builder->whereBetween('salary', [$minSalary, $maxSalary]);
-        }elseif (count($salaryRange) == 1) {
-            $builder->where('salary', $value);
-        }else{
+        }elseif (substr($value, -1) === '-') {
+            $minSalary = (int) rtrim($value, '-');
+            $builder->where('salary', '>', $minSalary);
+        }elseif (substr($value, 0, 1) === '-') {
+            $maxSalary = (int) substr($value, 1);
+            $builder->where('salary', '<=', $maxSalary);
+        } else {
             abort(404);
         }
     }
@@ -95,7 +105,7 @@ class ResumeFilter extends AbstractFilter
 
     public function image(Builder $builder, $value)
     {
-        if ($value === 'true'){
+        if ($value === 'with'){
             $result = $builder->whereNotNull('image');
         }else{
             $result = $builder->WhereNull('image');

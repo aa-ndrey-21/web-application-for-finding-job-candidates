@@ -4,7 +4,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import Selector from '@/Components/Selector';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -25,8 +27,23 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'));
+    };
+
+    const dataGender = ['male', 'female', 'other'];
+    const [selectedGender, setSelectedGender] = useState(null);
+    const handleGenderChange = (e) => {
+        setSelectedGender(e.target.value);
+        setData('gender', e.target.value, () => {
+        });
+    };
+
+    const dataMode = ['employer', 'worker'];
+    const [selectedMode, setSelectedMode] = useState(null);
+    const handleModeChange = (e) => {
+        setSelectedMode(e.target.value);
+        setData('mode', e.target.value, () => {
+        });
     };
 
     return (
@@ -35,19 +52,7 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="mode" value="Mode" />
-
-                    <TextInput
-                        id="mode"
-                        name="mode"
-                        value={data.mode}
-                        className="mt-1 block w-full"
-                        autoComplete="mode"
-                        isFocused={true}
-                        onChange={(e) => setData('mode', e.target.value)}
-                        required
-                    />
-
+                    <Selector title='Mode' dataSelector={dataMode} selected={selectedMode} handleChange={handleModeChange}/>
                     <InputError message={errors.mode} className="mt-2" />
                 </div>
 
@@ -103,19 +108,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="gender" value="Gender" />
-
-                    <TextInput
-                        id="gender"
-                        name="gender"
-                        value={data.gender}
-                        className="mt-1 block w-full"
-                        autoComplete="gender"
-                        isFocused={true}
-                        onChange={(e) => setData('gender', e.target.value)}
-                        required
-                    />
-
+                    <Selector title='Gender' dataSelector={dataGender} selected={selectedGender} handleChange={handleGenderChange}/>
                     <InputError message={errors.gender} className="mt-2" />
                 </div>
 
@@ -156,7 +149,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md"
                     >
                         Already registered?
                     </Link>

@@ -53,13 +53,18 @@ class VacancyFilter extends AbstractFilter
     public function salary(Builder $builder, $value)
     {
         $salaryRange = explode('-', $value);
-        if (count($salaryRange) == 2) {
+    
+        if (count($salaryRange) == 2 && $salaryRange[0] !== '' && $salaryRange[1] !== '') {
             $minSalary = (int) $salaryRange[0];
             $maxSalary = (int) $salaryRange[1];
             $builder->whereBetween('salary', [$minSalary, $maxSalary]);
-        }elseif (count($salaryRange) == 1) {
-            $builder->where('salary', $value);
-        }else{
+        }elseif (substr($value, -1) === '-') {
+            $minSalary = (int) rtrim($value, '-');
+            $builder->where('salary', '>', $minSalary);
+        }elseif (substr($value, 0, 1) === '-') {
+            $maxSalary = (int) substr($value, 1);
+            $builder->where('salary', '<=', $maxSalary);
+        } else {
             abort(404);
         }
     }
@@ -81,7 +86,7 @@ class VacancyFilter extends AbstractFilter
 
     public function logo(Builder $builder, $value)
     {
-        if ($value === 'true'){
+        if ($value === 'with'){
             $result = $builder->whereNotNull('logo');
         }else{
             $result = $builder->WhereNull('logo');

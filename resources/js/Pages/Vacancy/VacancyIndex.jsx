@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Pagination from '@/Components/Pagination';
 import VacancyCard from '@/Components/VacancyCard';
+import FilterVacancy from './FilterVacancy';
 
 export default function VacancyIndex({ auth, vacancies, categories }) {
     return (
@@ -15,14 +16,16 @@ export default function VacancyIndex({ auth, vacancies, categories }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white p-6 overflow-hidden flex shadow-sm sm:rounded-lg">
                         <div className="text-gray-900 flex-initial w-9/12">
-                                    {vacancies.data.map((vacancy) => (
+                            {vacancies.data.length > 0 ? (
+                                    vacancies.data.map((vacancy) => (
                                         <VacancyCard key={vacancy.id} vacancy={vacancy} categories={categories} ></VacancyCard>
-                                    ))}
+                                    ))
+                                ) : (
+                                    <p>There's nothing here yet, come back later.</p>
+                                )}
                             <Pagination class="mt-6" links={vacancies.links} />
                         </div>
-                        <div className="h-min w-3/12 p-4 ml-2 mt-2 border-2 border-customColor rounded-md">
-                            
-                        </div>
+                        <FilterVacancy categories={categories}/>
                     </div>
                 </div>
             </div>

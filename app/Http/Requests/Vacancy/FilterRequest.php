@@ -31,7 +31,7 @@ class FilterRequest extends FormRequest
             'city' => 'string',
             'attend' => 'string',
             'employment' => 'string',
-            'logo' => 'nullable|string',
+            'logo' => 'string',
             'demands' => 'string',
         ];
     }
