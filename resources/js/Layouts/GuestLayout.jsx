@@ -6,7 +6,7 @@ export default function Guest({ children }) {
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <Link href={route('welcome.index')}>
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-800" />
+                    <ApplicationLogo className="w-20 h-20 mt-6 fill-current text-gray-800" />
                 </Link>
             </div>
 

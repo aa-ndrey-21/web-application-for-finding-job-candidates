@@ -17,6 +17,12 @@ export default {
             },
             colors: {
                 customColor: '#374151',
+                customColor100: '#768bad',
+                customColor700: '#1f252e',
+                greenColor: '#445340',
+                greenColor100: '#91b089',
+                greenColor700: '#2a3327',
+                
             },
         },
     },
