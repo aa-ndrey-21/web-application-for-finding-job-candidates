@@ -4,7 +4,7 @@ import { useState } from 'react';
 import city from '../../../../public/image/city.png';
 import gender from '../../../../public/image/gender.png';
 import telegram from '../../../../public/image/telegram.png';
-import gitHub from '../../../../public/image/github.png';
+import github from '../../../../public/image/github.png';
 import linkedin from '../../../../public/image/linkedin.png';
 
 export default function ResumeShow({ auth, resume, category }) {
@@ -58,7 +58,13 @@ export default function ResumeShow({ auth, resume, category }) {
                                     </ul>
                                 </div>
                                 <div className="flex flex-col items-center justify-center w-full">
-                                    <h3 className='text-lg font-bold'>BIO:</h3>
+                                    <h3 className='text-lg font-bold'>Keywords:</h3>
+                                    <p>{resume.keywords}</p>
+                                </div> 
+                            </div>
+                            <div className='flex flex-col pb-4 mb-4 border-b-2 border-solid border-customColor'>
+                                <div className="flex flex-col items-center justify-center w-full">
+                                <h3 className='text-lg font-bold'>BIO:</h3>
                                     <p>{resume.bio}</p>
                                 </div> 
                             </div>
@@ -76,9 +82,9 @@ export default function ResumeShow({ auth, resume, category }) {
                             </div>
                             <div className='flex items-center justify-center pb-4 mb-4 border-b-2 border-solid border-customColor'>
                                 <div className='mt-2 text-center'>
-                                    <a onClick={showDetails} className="bg-customColor inline-block mb-2 hover:bg-customColor700 hover:text-gray-300 cursor-pointer text-white font-semibold py-2 px-4 rounded">
+                                    <button onClick={showDetails} className="bg-customColor inline-block mb-2 hover:bg-customColor700 hover:text-gray-300 cursor-pointer text-white font-semibold py-2 px-4 rounded">
                                         {details ? 'Hide details' : 'Show details'} 
-                                    </a>
+                                    </button>
                                     {details && 
                                     <>
                                         <ul className='flex gap-6'>
@@ -87,31 +93,29 @@ export default function ResumeShow({ auth, resume, category }) {
                                             <li className='text-lg'><span className='font-bold'>Number</span> - {resume.number}</li>
                                         </ul>
                                         <h3 className='text-lg font-bold'>Social media:</h3>
-                                        <ul className='flex gap-6 text-center justify-center items-center'>
-                                            {resume.telegram && resume.whatsApp && resume.signal ? (
-                                                <div>
+                                            {resume.telegram || resume.github || resume.linkedin ? (
+                                                <ul className='flex gap-6 text-center justify-center items-center'>
                                                     {resume.telegram ? (
                                                     <li className='text-lg'>
-                                                        <a href={resume.telegram}><img className='inline-block h-6 w-6 cursor-pointer' src={telegram} alt="" /></a>
+                                                        <a href={resume.telegram} target="_blank"><img className='inline-block h-6 w-6 cursor-pointer' src={telegram} alt="" /></a>
                                                     </li>
                                                     ) : null}
 
-                                                    {resume.whatsApp ? (
+                                                    {resume.github ? (
                                                     <li className='text-lg'>
-                                                        <a href={resume.whatsApp}><img className='inline-block h-6 w-6 cursor-pointer' src={gitHub} alt="" /></a>
+                                                        <a href={resume.github} target="_blank"><img className='inline-block h-6 w-6 cursor-pointer' src={github} alt="" /></a>
                                                     </li>
                                                     ) : null}
 
-                                                    {resume.signal ? (
+                                                    {resume.linkedin ? (
                                                     <li className='text-lg'>
-                                                        <a href={resume.signal}><img className='inline-block h-6 w-6 cursor-pointer' src={linkedin} alt="" /></a>
+                                                        <a href={resume.linkedin} target="_blank"><img className='inline-block h-6 w-6 cursor-pointer' src={linkedin} alt="" /></a>
                                                     </li>
                                                     ) : null}
-                                                </div>
+                                                </ul>
                                                 ) : (
-                                                <li className='text-lg'>Not included in this resume</li>
+                                                <p className='text-lg'>Not included in this resume</p>
                                             )}
-                                        </ul>
                                     </>
                                     }
                                     {error && <div className='mt-2 text-red-600'>Login as employer to view details about this resume</div>}

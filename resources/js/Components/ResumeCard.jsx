@@ -24,7 +24,7 @@ export default function ResumeCard({ resume, categories }) {
               {resume.name} {resume.surname} 
             </div>
             <div>
-              {resume.bio} 
+              {resume.keywords} 
             </div>
           </div>
         </div>

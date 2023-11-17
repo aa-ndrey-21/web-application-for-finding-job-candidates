@@ -22,18 +22,18 @@ return new class extends Migration
             $table->string('number', 15);
             $table->string('email', 255);
             $table->string('telegram', 255)->nullable();
-            $table->string('whatsApp', 255)->nullable();
-            $table->string('signal', 255)->nullable();
+            $table->string('github', 255)->nullable();
+            $table->string('linkedin', 255)->nullable();
             $table->unsignedBigInteger('experience');
             $table->unsignedBigInteger('salary');
             $table->string('attend', 255);
             $table->string('employment', 255);
             $table->string('image')->nullable();
+            $table->text('keywords', 255);
             $table->text('bio');
             $table->text('opportunities');
             $table->text('background');
             $table->timestamps();
-            $table->softDeletes(); 
         });
         Schema::table('resumes', function (Blueprint $table) {
             $table->foreign('category_id', 'resume_category_fk')->references('id')->on('categories');

@@ -53,19 +53,25 @@ export default function VacancyShow({ auth, vacancy, category }) {
                                         <li className='text-lg'><span className='font-bold'>Need experience</span> - {vacancy.experience}</li>
                                     </ul>
                                 </div>
-                                <div className="max-w-2xl flex flex-col items-center justify-center w-full">
+                                <div className="flex flex-col items-center justify-center w-full">
+                                    <h3 className='text-lg font-bold'>Keywords:</h3>
+                                    <p>{vacancy.keywords}</p>
+                                </div> 
+                            </div>
+                            <div className='flex items-center flex-col pb-4 mb-4 border-b-2 border-solid border-customColor'>
+                                <div className="flex flex-col items-center justify-center w-full">
                                     <h3 className='text-lg font-bold'>Description:</h3>
                                     <p>{vacancy.description}</p>
                                 </div> 
                             </div>
                             <div className='flex items-center flex-col pb-4 mb-4 border-b-2 border-solid border-customColor'>
-                                <div className="max-w-2xl flex flex-col items-center justify-center w-full">
+                                <div className="flex flex-col items-center justify-center w-full">
                                     <h3 className='text-lg font-bold'>Demands:</h3>
                                     <p>{vacancy.demands}</p>
                                 </div> 
                             </div>
                             <div className='flex items-center flex-col pb-4 mb-4 border-b-2 border-solid border-customColor'>
-                                <div className="max-w-2xl flex flex-col items-center justify-center w-full">
+                                <div className="flex flex-col items-center justify-center w-full">
                                     <h3 className='text-lg font-bold'>Details:</h3>
                                     <p>{vacancy.details}</p>
                                 </div> 
@@ -82,10 +88,9 @@ export default function VacancyShow({ auth, vacancy, category }) {
                                             <li className='text-lg'><span className='font-bold'>Email</span> - {vacancy.email}</li>
                                             <li className='text-lg'><span className='font-bold'>Number</span> - {vacancy.number}</li>
                                         </ul>
-                                        {/* <h3 className='text-lg font-bold'>Social media:</h3>
-                                        <ul className='flex gap-6 text-center justify-center items-center'>
-                                            {vacancy.telegram && vacancy.linkedin ? (
-                                                <div>
+                                        <h3 className='text-lg font-bold'>Social media:</h3>
+                                            {vacancy.telegram || vacancy.linkedin ? (
+                                                <ul className='flex gap-6 text-center justify-center items-center'>
                                                     {vacancy.telegram ? (
                                                     <li className='text-lg'>
                                                         <a href={vacancy.telegram}><img className='inline-block h-6 w-6 cursor-pointer' src={telegram} alt="" /></a>
@@ -96,11 +101,10 @@ export default function VacancyShow({ auth, vacancy, category }) {
                                                         <a href={vacancy.linkedin}><img className='inline-block h-6 w-6 cursor-pointer' src={linkedin} alt="" /></a>
                                                     </li>
                                                     ) : null}
-                                                </div>
+                                                </ul>
                                                 ) : (
-                                                <li className='text-lg'>Not included in this vacancy</li>
+                                                <p className='text-lg'>Not included in this vacancy</p>
                                             )}
-                                        </ul> */}
                                     </>
                                     }
                                     {error && <div className='mt-2 text-red-600'>Login as employer to view details about this resume</div>}

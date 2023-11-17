@@ -26,7 +26,7 @@ const FilterVacancy = ( {categories} ) => {
         attend: urlParams['attend'] || '',
         employment: urlParams['employment'] || '',
         logo: urlParams['logo'] || '',
-        demands: urlParams['demands'] || '',
+        keywords: urlParams['keywords'] || '',
     });
     
     const dataAttend = ['office', 'remote'];
@@ -84,8 +84,8 @@ const FilterVacancy = ( {categories} ) => {
     if (data.logo && data.logo !== "") {
         urlWithParams += `logo=${data.logo}&`;
     }   
-    if (data.demands && data.demands !== "") {
-        urlWithParams += `demands=${data.demands}&`;
+    if (data.keywords && data.keywords !== "") {
+        urlWithParams += `keywords=${data.keywords}&`;
     }    
     router.visit(urlWithParams, {
         method: 'get',
@@ -143,7 +143,7 @@ const FilterVacancy = ( {categories} ) => {
             <Selector title='Logo' dataSelector={dataLogo} selected={selectedLogo} handleChange={handleLogoChange}/>
         </div>
         <div>
-            <FilterParameter label='Keywords' name='demands' value={data.demands} onChange={(e) => setData("demands", e.target.value)} />
+            <FilterParameter label='Keywords' name='keywords' value={data.keywords} onChange={(e) => setData("keywords", e.target.value)} />
         </div>
         <div className="flex justify-between">
             <button 

@@ -37,7 +37,7 @@ class Service extends Controller
   }
 
   public function store($data){
-    if (request('image')){
+    if (request()->hasFile('image')){
       $imagePath = request()->file('image')->store('resume', 'public');
       $data['image'] = $imagePath;
     }
@@ -53,11 +53,15 @@ class Service extends Controller
   }
 
   public function update($resume, $data){
+    if (request()->hasFile('image')){
+      $imagePath = request()->file('image')->store('resume', 'public');
+      $data['image'] = $imagePath;
+      Storage::disk('public')->delete($resume->image);  
+    }
     $resume->update($data);
   }
 
   public function destroy($resume){
-    Storage::disk('public')->delete($resume->image);  
     $resume->delete();
     $user = auth()->user();
     $user->resume_id = null;

@@ -5,17 +5,23 @@ import InputError from '@/Components/InputError';
 
 
 export default function VacancyCreate({ auth, categories, vacancy}) {
-    const { data, setData, patch, processing, errors } = useForm({
+    const vacancy_id = auth.user ? auth.user.vacancy_id : null;
+
+    const { data, setData, post, processing, errors } = useForm({
+        _method: 'patch',
         category_id: vacancy.category_id,
         name: vacancy.name,
         experience: vacancy.experience,
         salary: vacancy.salary,
         city: vacancy.city,
-        attend: vacancy.attend,
-        employment: vacancy.employment,
         number: vacancy.number,
         email: vacancy.email,
+        telegram: vacancy.telegram ?? '',
+        linkedin: vacancy.linkedin ?? '',
+        attend: vacancy.attend,
+        employment: vacancy.employment,
         logo: vacancy.logo,
+        keywords: vacancy.keywords,
         description: vacancy.description,
         demands: vacancy.demands,
         details: vacancy.details,
@@ -23,7 +29,7 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
 
     const submit = (e) => {
         e.preventDefault();
-        patch(route('vacancy.update', vacancy.id));
+        post(route('vacancy.update', vacancy_id), data, { preserveScroll: true });
     };
     return (
         <AuthenticatedLayout
@@ -153,21 +159,6 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    Logo
-                                </label>
-                                <input
-                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="logo"
-                                    name="logo"
-                                    value={data.logo}
-                                    onChange={(e) => setData('logo', e.target.value)}
-                                />
-                                <InputError message={errors.logo} />
-                            </div>
-                            <div className="mb-2">
-                                <label
-                                    className="block text-gray-700 text-sm font-bold mt-2"
-                                >
                                     Number
                                 </label>
                                 <input
@@ -194,6 +185,92 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
                                     onChange={(e) => setData('email', e.target.value)}
                                 />
                                 <InputError message={errors.email} />
+                            </div>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Telegram
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="telegram"
+                                    name="telegram"
+                                    value={data.telegram}
+                                    onChange={(e) => setData('telegram', e.target.value)}
+                                />
+                                <InputError message={errors.telegram} />
+                            </div>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Link on Linkedin
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="linkedin"
+                                    name="linkedin"
+                                    value={data.linkedin}
+                                    onChange={(e) => setData('linkedin', e.target.value)}
+                                />
+                                <InputError message={errors.linkedin} />
+                            </div>
+
+                            {vacancy.logo ?
+                                <>
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Logo
+                                </label>
+                                <div className="inline-block h-28 w-28 shrink-0 bg-slate-200 rounded-full overflow-hidden">
+                                <img 
+                                    src={vacancy.logo.startsWith('vacancy/') ? `/storage/${vacancy.logo}` : vacancy.logo} 
+                                    alt={vacancy.name} 
+                                    className="w-full h-full object-cover" />
+                                </div>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="logo"
+                                    name="logo"
+                                    type='file'
+                                    onChange={(e) => setData("logo", e.target.files[0])}
+                                />
+                                <InputError message={errors.logo} />
+                                </>
+                            : 
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Logo
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="logo"
+                                    name="logo"
+                                    type='file'
+                                    onChange={(e) => setData("logo", e.target.files[0])}
+                                />
+                                <InputError message={errors.logo} />
+                            </div>
+                            }
+
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Keywords
+                                </label>
+                                <textarea
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="keywords"
+                                    name="keywords"
+                                    value={data.keywords}
+                                    onChange={(e) => setData('keywords', e.target.value)}
+                                />
+                                <InputError message={errors.keywords} />
                             </div>
 
                             <div className="mb-2">

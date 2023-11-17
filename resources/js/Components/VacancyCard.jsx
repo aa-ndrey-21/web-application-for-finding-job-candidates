@@ -24,7 +24,7 @@ export default function VacancyCard({ vacancy, categories }) {
               {vacancy.name}
             </div>
             <div>
-              {vacancy.description} 
+              {vacancy.keywords} 
             </div>
           </div>
         </div>

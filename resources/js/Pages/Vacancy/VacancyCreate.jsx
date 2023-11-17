@@ -3,18 +3,20 @@ import { Head, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
 
-
 export default function VacancyCreate({ auth, categories}) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         experience: '',
         salary: '',
         city: '',
-        attend: '',
-        employment: '',
         number: '',
         email: auth.user.email,
+        telegram: '',
+        linkedin: '',
+        attend: '',
+        employment: '',
         logo: '',
+        keywords: '',
         description: '',
         demands: '',
         details: '',
@@ -45,14 +47,14 @@ export default function VacancyCreate({ auth, categories}) {
                                     Category
                                 </label>
                                 <select
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="category_id"
                                     name="category_id"
                                     onChange={(e) => setData('category_id', e.target.value)}
                                 >
                                     <option value="">Select a category</option>
                                     {categories.map((category) => (
-                                        <option value={category.id}>{ category.title }</option>
+                                        <option key={category.id} value={category.id}>{ category.title }</option>
                                     ))}
                                 </select>
                                 <InputError message={errors.category_id} />
@@ -145,21 +147,6 @@ export default function VacancyCreate({ auth, categories}) {
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    Logo
-                                </label>
-                                <input
-                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="logo"
-                                    name="logo"
-                                    type='file'
-                                    onChange={(e) => setData("logo", e.target.files[0])}
-                                />
-                                <InputError message={errors.logo} />
-                            </div>
-                            <div className="mb-2">
-                                <label
-                                    className="block text-gray-700 text-sm font-bold mt-2"
-                                >
                                     Number
                                 </label>
                                 <input
@@ -186,7 +173,64 @@ export default function VacancyCreate({ auth, categories}) {
                                 />
                                 <InputError message={errors.email} />
                             </div>
-
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Telegram
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="telegram"
+                                    name="telegram"
+                                    onChange={(e) => setData('telegram', e.target.value)}
+                                />
+                                <InputError message={errors.telegram} />
+                            </div>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Link on linkedin
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="linkedin"
+                                    name="linkedin"
+                                    onChange={(e) => setData('linkedin', e.target.value)}
+                                />
+                                <InputError message={errors.linkedin} />
+                            </div>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Logo
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="logo"
+                                    name="logo"
+                                    type='file'
+                                    onChange={(e) => setData("logo", e.target.files[0])}
+                                />
+                                <InputError message={errors.logo} />
+                            </div>
+                            
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Keywords
+                                </label>
+                                <textarea
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="keywords"
+                                    name="keywords"
+                                    onChange={(e) => setData('keywords', e.target.value)}
+                                />
+                                <InputError message={errors.keywords} />
+                            </div>
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"

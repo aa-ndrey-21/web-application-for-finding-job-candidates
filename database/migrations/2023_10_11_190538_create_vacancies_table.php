@@ -18,16 +18,18 @@ return new class extends Migration
             $table->unsignedBigInteger('experience');
             $table->unsignedBigInteger('salary');
             $table->string('city', 255);
-            $table->string('attend', 255);
-            $table->string('employment', 255);
             $table->string('number', 15);
             $table->string('email', 255);
+            $table->string('telegram', 255)->nullable();
+            $table->string('linkedin', 255)->nullable();
+            $table->string('attend', 255);
+            $table->string('employment', 255);
             $table->string('logo')->nullable();
+            $table->text('keywords', 255);
             $table->text('description');
             $table->text('demands');
             $table->text('details')->nullable();
             $table->timestamps();
-            $table->softDeletes(); 
         });
 
         Schema::table('vacancies', function (Blueprint $table) {

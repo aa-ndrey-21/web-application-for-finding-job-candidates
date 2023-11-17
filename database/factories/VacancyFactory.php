@@ -20,17 +20,20 @@ class VacancyFactory extends Factory
         return [
             'category_id' => Category::get()->random()->id,
             'name' => $this->faker->company,
-            'experience' => $this->faker->numberBetween(1, 10), 
-            'salary' => $this->faker->numberBetween(30000, 100000),
+            'experience' => $this->faker->numberBetween(1, 15), 
+            'salary' => $this->faker->numberBetween(300, 10000),
             'city' => $this->faker->city,
-            'attend' => $this->faker->randomElement(['office', 'remote']),
-            'employment' => $this->faker->randomElement(['fullday', 'partday']),
             'number' => $this->faker->tollFreePhoneNumber(),
             'email' => fake()->unique()->safeEmail(),
+            'telegram' => $this->faker->url(),
+            'linkedin' => $this->faker->url(),
+            'attend' => $this->faker->randomElement(['office', 'remote', 'hybrid']),
+            'employment' => $this->faker->randomElement(['fullday', 'partday', 'hybrid']),
             'logo' => $this->faker->imageUrl(),
-            'description' => $this->faker->text(100),
-            'demands' => $this->faker->text(100),
-            'details' => $this->faker->text(100),
+            'keywords' => $this->faker->text(200),
+            'description' => $this->faker->text(800),
+            'demands' => $this->faker->text(800),
+            'details' => $this->faker->text(800),
         ];
     }
 }

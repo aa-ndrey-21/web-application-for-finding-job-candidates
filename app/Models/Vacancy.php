@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Filterable;
 
 
 class Vacancy extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Filterable;
     
     protected $table = 'vacancies';
@@ -21,11 +19,14 @@ class Vacancy extends Model
         'experience',
         'salary',
         'city',
-        'attend',
         'number',
         'email',
+        'telegram',
+        'linkedin',
+        'attend',
         'employment',
         'logo',
+        'keywords',
         'description',
         'demands',
         'details',

@@ -14,13 +14,14 @@ export default function ResumeCreate({ auth, categories}) {
         number: '',
         email: auth.user.email,
         telegram: '',
-        whatsApp: '',
-        signal: '',
+        github: '',
+        linkedin: '',
         experience: '',
         salary: '',
         attend: '',
         employment: '',
         image: '',
+        keywords: '',
         bio: '',
         opportunities: '',
         background: '',
@@ -52,14 +53,14 @@ export default function ResumeCreate({ auth, categories}) {
                                     Category
                                 </label>
                                 <select
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="category_id"
                                     name="category_id"
                                     onChange={(e) => setData('category_id', e.target.value)}
                                 >
                                     <option value="">Select a category</option>
                                     {categories.map((category) => (
-                                        <option value={category.id}>{ category.title }</option>
+                                        <option key={category.id} value={category.id}>{ category.title }</option>
                                     ))}
                                 </select>
                                 <InputError message={errors.category_id} />
@@ -186,29 +187,29 @@ export default function ResumeCreate({ auth, categories}) {
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    WhatsApp
+                                    Link on GitHub
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="whatsApp"
-                                    name="whatsApp"
-                                    onChange={(e) => setData('whatsApp', e.target.value)}
+                                    id="github"
+                                    name="github"
+                                    onChange={(e) => setData('github', e.target.value)}
                                 />
-                                <InputError message={errors.whatsApp} />
+                                <InputError message={errors.github} />
                             </div>
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    Signal
+                                    Link on linkedin
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="signal"
-                                    name="signal"
-                                    onChange={(e) => setData('signal', e.target.value)}
+                                    id="linkedin"
+                                    name="linkedin"
+                                    onChange={(e) => setData('linkedin', e.target.value)}
                                 />
-                                <InputError message={errors.signal} />
+                                <InputError message={errors.linkedin} />
                             </div>
 
                             <div className="mb-2">
@@ -283,6 +284,20 @@ export default function ResumeCreate({ auth, categories}) {
                                 <InputError message={errors.image} />
                             </div>
 
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Keywords
+                                </label>
+                                <textarea
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="keywords"
+                                    name="keywords"
+                                    onChange={(e) => setData('keywords', e.target.value)}
+                                />
+                                <InputError message={errors.keywords} />
+                            </div>
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"

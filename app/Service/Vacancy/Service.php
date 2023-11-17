@@ -36,7 +36,7 @@ class Service extends Controller
   }
 
   public function store($data){
-    if (request('logo')){
+    if (request()->hasFile('logo')){
       $logoPath = request()->file('logo')->store('vacancy', 'public');
       $data['logo'] = $logoPath;
     }
@@ -52,6 +52,11 @@ class Service extends Controller
   }
 
   public function update($vacancy, $data){
+    if (request()->hasFile('logo')){
+      $logoPath = request()->file('logo')->store('vacancy', 'public');
+      $data['logo'] = $logoPath;
+      Storage::disk('public')->delete($vacancy->logo);  
+    }
     $vacancy->update($data);
   }
 

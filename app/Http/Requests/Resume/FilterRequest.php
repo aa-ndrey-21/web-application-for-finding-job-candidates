@@ -30,10 +30,10 @@ class FilterRequest extends FormRequest
             'city' => 'string',
             'experience' => 'integer',
             'salary' => 'string',
-            'attend' => 'string',
-            'employment' => 'string',
-            'image' => 'string',
-            'opportunities' => 'string',
+            'attend' => 'string|in:office,remote,hybrid',
+            'employment' => 'string|in:fullday,partday,hybrid',
+            'image' => 'string|in:with,without',
+            'keywords' => 'string',
         ];
     }
 }

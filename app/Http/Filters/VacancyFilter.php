@@ -16,7 +16,7 @@ class VacancyFilter extends AbstractFilter
     public const ATTEND = 'attend';
     public const EMPLOYMENT = 'employment';
     public const LOGO = 'logo';
-    public const DEMANDS = 'demands';
+    public const KEYWORDS = 'keywords';
     
 
 
@@ -31,7 +31,7 @@ class VacancyFilter extends AbstractFilter
             self::ATTEND => [$this, 'attend'],
             self::EMPLOYMENT => [$this, 'employment'],
             self::LOGO => [$this, 'logo'],
-            self::DEMANDS => [$this, 'demands'],
+            self::KEYWORDS => [$this, 'keywords'],
         ];
     }
 
@@ -76,12 +76,12 @@ class VacancyFilter extends AbstractFilter
 
     public function attend(Builder $builder, $value)
     {
-        $builder->where('attend', $value);
+        $builder->where('attend', $value)->orWhere('attend', 'hybrid');
     }
 
     public function employment(Builder $builder, $value)
     {
-        $builder->where('employment', $value);
+        $builder->where('employment', $value)->orWhere('employment', 'hybrid');
     }
 
     public function logo(Builder $builder, $value)
@@ -93,8 +93,8 @@ class VacancyFilter extends AbstractFilter
         }
     }
 
-    public function demands(Builder $builder, $value)
+    public function keywords(Builder $builder, $value)
     {
-        $builder->where('demands', 'like', "%{$value}%");
+        $builder->where('keywords', 'like', "%{$value}%");
     }
 }

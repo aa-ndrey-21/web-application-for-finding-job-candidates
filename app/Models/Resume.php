@@ -4,13 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\Filterable;
 
 class Resume extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     use Filterable;
     
     protected $table = 'resumes';
@@ -23,11 +21,15 @@ class Resume extends Model
         'city',
         'number',
         'email',
+        'telegram',
+        'github',
+        'linkedin',
         'experience',
         'salary',
         'attend',
         'employment',
         'image',
+        'keywords',
         'bio',
         'opportunities',
         'background',

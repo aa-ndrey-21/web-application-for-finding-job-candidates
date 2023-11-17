@@ -17,7 +17,7 @@ class ResumeFilter extends AbstractFilter
     public const ATTEND = 'attend';
     public const EMPLOYMENT = 'employment';
     public const IMAGE = 'image';
-    public const OPPORTUNITIES = 'opportunities';
+    public const KEYWORDS = 'keywords';
 
     protected function getCallbacks(): array
     {
@@ -31,7 +31,7 @@ class ResumeFilter extends AbstractFilter
             self::ATTEND => [$this, 'attend'],
             self::EMPLOYMENT => [$this, 'employment'],
             self::IMAGE => [$this, 'image'],
-            self::OPPORTUNITIES => [$this, 'opportunities'],
+            self::KEYWORDS => [$this, 'keywords'],
         ];
     }
 
@@ -95,12 +95,12 @@ class ResumeFilter extends AbstractFilter
 
     public function attend(Builder $builder, $value)
     {
-        $builder->where('attend', $value);
+        $builder->where('attend', $value)->orWhere('attend', 'hybrid');
     }
 
     public function employment(Builder $builder, $value)
     {
-        $builder->where('employment', $value);
+        $builder->where('employment', $value)->orWhere('employment', 'hybrid');
     }
 
     public function image(Builder $builder, $value)
@@ -112,8 +112,8 @@ class ResumeFilter extends AbstractFilter
         }
     }
 
-    public function opportunities(Builder $builder, $value)
+    public function keywords(Builder $builder, $value)
     {
-        $builder->where('opportunities', 'like', "%{$value}%");
+        $builder->where('keywords', 'like', "%{$value}%");
     }
 }

@@ -8,10 +8,11 @@ export default function ResumeEdit({ auth, categories, resume}) {
     const { 
         data, 
         setData, 
-        patch, 
+        post, 
         processing, 
         errors
     } = useForm({
+        _method: 'patch',
         category_id: resume.category_id,
         name: resume.name,
         surname: resume.surname,
@@ -21,13 +22,14 @@ export default function ResumeEdit({ auth, categories, resume}) {
         number: resume.number,
         email: resume.email,
         telegram: resume.telegram ?? '',
-        whatsApp: resume.whatsApp ?? '',
-        signal: resume.signal ?? '',
+        github: resume.github ?? '',
+        linkedin: resume.linkedin ?? '',
         experience: resume.experience,
         salary: resume.salary,
         attend: resume.attend,
         employment: resume.employment,
         image: resume.image ?? '',
+        keywords: resume.keywords,
         bio: resume.bio,
         opportunities: resume.opportunities,
         background: resume.background,
@@ -35,28 +37,7 @@ export default function ResumeEdit({ auth, categories, resume}) {
 
     const editResume = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('category_id', data.category_id);
-        formData.append('name', data.surname);
-        formData.append('surname', data.name);
-        formData.append('age', data.gender);
-        formData.append('gender', data.age);
-        formData.append('city', data.number);
-        formData.append('number', data.city);
-        formData.append('email', data.email);
-        formData.append('telegram', data.telegram);
-        formData.append('whatsApp', data.whatsApp);
-        formData.append('signal', data.signal);
-        formData.append('experience', data.experience);
-        formData.append('salary', data.salary);
-        formData.append('attend', data.attend);
-        formData.append('employment', data.employment);
-        formData.append('image', data.image);
-        formData.append('bio', data.bio);
-        formData.append('opportunities', data.opportunities);
-        formData.append('background', data.background);
-        console.log(formData);
-        patch(route('resume.update', resume_id), formData);
+        post(route('resume.update', resume_id), data, { preserveScroll: true });
     };
     return (
         <AuthenticatedLayout
@@ -218,31 +199,31 @@ export default function ResumeEdit({ auth, categories, resume}) {
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    WhatsApp
+                                    Link on GitHub
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="whatsApp"
-                                    name="whatsApp"
-                                    value={data.whatsApp}
-                                    onChange={(e) => setData('whatsApp', e.target.value)}
+                                    id="github"
+                                    name="github"
+                                    value={data.github}
+                                    onChange={(e) => setData('github', e.target.value)}
                                 />
-                                <InputError message={errors.whatsApp} />
+                                <InputError message={errors.github} />
                             </div>
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
                                 >
-                                    Signal
+                                    Link on Linkedin
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                    id="signal"
-                                    name="signal"
-                                    value={data.signal}
-                                    onChange={(e) => setData('signal', e.target.value)}
+                                    id="linkedin"
+                                    name="linkedin"
+                                    value={data.linkedin}
+                                    onChange={(e) => setData('linkedin', e.target.value)}
                                 />
-                                <InputError message={errors.signal} />
+                                <InputError message={errors.linkedin} />
                             </div>
 
                             <div className="mb-2">
@@ -305,6 +286,29 @@ export default function ResumeEdit({ auth, categories, resume}) {
                                 />
                                 <InputError message={errors.employment} />
                             </div>
+                            {resume.image ?
+                                <>
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Image
+                                </label>
+                                <div className="inline-block h-28 w-28 shrink-0 bg-slate-200 rounded-full overflow-hidden">
+                                <img 
+                                    src={resume.image.startsWith('resume/') ? `/storage/${resume.image}` : resume.image} 
+                                    alt={resume.name} 
+                                    className="w-full h-full object-cover" />
+                                </div>
+                                <input
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="image"
+                                    name="image"
+                                    type='file'
+                                    onChange={(e) => setData("image", e.target.files[0])}
+                                />
+                                <InputError message={errors.image} />
+                                </>
+                            : 
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
@@ -313,15 +317,31 @@ export default function ResumeEdit({ auth, categories, resume}) {
                                 </label>
                                 <input
                                     className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="image"
                                     name="image"
                                     type='file'
-                                    // ref={register}
-                                    // value={data.image}
                                     onChange={(e) => setData("image", e.target.files[0])}
                                 />
                                 <InputError message={errors.image} />
                             </div>
+                            }
 
+
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 text-sm font-bold mt-2"
+                                >
+                                    Keywords
+                                </label>
+                                <textarea
+                                    className={`my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="keywords"
+                                    name="keywords"
+                                    value={data.keywords}
+                                    onChange={(e) => setData('keywords', e.target.value)}
+                                />
+                                <InputError message={errors.keywords} />
+                            </div>
                             <div className="mb-2">
                                 <label
                                     className="block text-gray-700 text-sm font-bold mt-2"
