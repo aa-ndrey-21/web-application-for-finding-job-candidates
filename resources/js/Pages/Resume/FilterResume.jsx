@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import FilterParameter from '@/Components/FilterParameter';
 import Selector from '@/Components/Selector';
+import PrimaryButton  from '@/Components/PrimaryButton';
+import DangerButton  from '@/Components/DangerButton';
 
 const FilterResume = ( {categories} ) => {
     function getQueryParams() {
@@ -169,18 +171,12 @@ const FilterResume = ( {categories} ) => {
             <FilterParameter label='Keywords' name='keywords' value={data.keywords} onChange={(e) => setData("keywords", e.target.value)} />
         </div>
         <div className="flex justify-between">
-            <button 
-                type='button' 
-                className='mt-3 p-2 text-white bg-red-500 rounded-md hover:text-gray-300'
-                onClick={handleFilterReset}>
-                    Reset
-            </button>
-            <button 
-                type='button' 
-                className='mt-3 p-2 text-white bg-customColor rounded-md hover:text-gray-300'
-                onClick={handleFilterApply}>
-                    Apply
-            </button>
+            <DangerButton className='mt-3 p-2' onClick={handleFilterReset}>
+                Reset
+            </DangerButton>
+            <PrimaryButton className='mt-3 p-2' onClick={handleFilterApply}>
+                Apply
+            </PrimaryButton>
         </div>
         </div>
         </>
