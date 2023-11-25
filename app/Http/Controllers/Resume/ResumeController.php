@@ -67,6 +67,9 @@ class ResumeController extends BaseController
      */
     public function edit(Resume $resume){
         $categories = $this->service->edit();
+        if (auth()->user()->resume_id !== $resume->id) {
+            abort(403, 'Forbidden');
+        }
         return Inertia::render('Resume/ResumeEdit', [
             'resume' => $resume,
             'categories' => $categories,
