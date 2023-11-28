@@ -192,165 +192,162 @@ export default function VacancyCreate({ auth, categories}) {
         >
             <Head title="Creating vacancy" />
             <div className="py-12">
-                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <form 
-                            className="p-6 text-gray-900 flex flex-col"
-                        >
-                            <ProgressBar className={progress} />
+                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg max-w-4xl mx-auto sm:px-6 lg:px-8">
+                    <form 
+                        className="p-6 text-gray-900 flex flex-col"
+                    >
+                        <ProgressBar className={progress} />
 
-                        {currentStep === 1 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>First information</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Name'/>
-                                        <Input className='my-2 w-full' name='name' value={data.name} onBlur={() => validateField('name')} onChange={(e) => setData('name', e.target.value)} placeholder={'Name your company...'} error={errors.name}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='City'/>
-                                        <Input className='my-2 w-full' name='city' value={data.city} onBlur={() => validateField('city')} onChange={(e) => setData('city', e.target.value)} placeholder={'Enter your city...'} error={errors.city}/>
-                                    </div>
+                    {currentStep === 1 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>First information</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Name'/>
+                                    <Input className='my-2 w-full' name='name' value={data.name} onBlur={() => validateField('name')} onChange={(e) => setData('name', e.target.value)} placeholder={'Name your company...'} error={errors.name}/>
                                 </div>
-                                <div className="mb-2">
-                                    <Label title='Category'/>
-                                    <select
-                                        className={`shadow my-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.category_id ? 'border-2 border-red-500' : ''}`}
-                                        id="category_id"
-                                        name="category_id"
-                                        value={data.category_id}
-                                        onChange={(e) => setData('category_id', e.target.value)}
-                                        onBlur={() => validateField('category_id')}
-                                    >
-                                        <option value=''>Select a category</option>
-                                        {categories.map((category) => (
-                                            <option key={category.id} value={category.id}>{ category.title }</option>
-                                        ))}
-                                    </select>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='City'/>
+                                    <Input className='my-2 w-full' name='city' value={data.city} onBlur={() => validateField('city')} onChange={(e) => setData('city', e.target.value)} placeholder={'Enter your city...'} error={errors.city}/>
                                 </div>
-                                <div className="flex justify-end">
-                                    <PrimaryButton className='mt-3 p-2' disabled={firstStepDisabled} onClick={handleNextStep}>
-                                        Next step
-                                    </PrimaryButton>
+                            </div>
+                            <div className="mb-2">
+                                <Label title='Category'/>
+                                <select
+                                    className={`shadow my-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.category_id ? 'border-2 border-red-500' : ''}`}
+                                    id="category_id"
+                                    name="category_id"
+                                    value={data.category_id}
+                                    onChange={(e) => setData('category_id', e.target.value)}
+                                    onBlur={() => validateField('category_id')}
+                                >
+                                    <option value=''>Select a category</option>
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.id}>{ category.title }</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="flex justify-end">
+                                <PrimaryButton className='mt-3 p-2' disabled={firstStepDisabled} onClick={handleNextStep}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 2 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Personal information (will be show only for workers)</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Number'/>
+                                    <Input className='my-2 w-full' name='number' value={data.number} onBlur={() => validateField('number')} onChange={(e) => setData('number', e.target.value)} placeholder={'Your number...'} error={errors.number}/>
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 2 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Personal information (will be show only for workers)</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Number'/>
-                                        <Input className='my-2 w-full' name='number' value={data.number} onBlur={() => validateField('number')} onChange={(e) => setData('number', e.target.value)} placeholder={'Your number...'} error={errors.number}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Email'/>
-                                        <Input className='my-2 w-full' name='email' value={data.email} onBlur={() => validateField('email')} onChange={(e) => setData('email', e.target.value)} placeholder={'...link on your Email'} error={errors.email}/>
-                                    </div>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Email'/>
+                                    <Input className='my-2 w-full' name='email' value={data.email} onBlur={() => validateField('email')} onChange={(e) => setData('email', e.target.value)} placeholder={'...link on your Email'} error={errors.email}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Telegram (not necessary)'/>
-                                        <Input className='my-2 w-full' name='telegram' value={data.telegram} onBlur={() => validateField('telegram')} onChange={(e) => setData('telegram', e.target.value)} placeholder={'...link on your Telegram'} error={errors.telegram}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Linkedin (not necessary)'/>
-                                        <Input className='my-2 w-full' name='linkedin' value={data.linkedin} onBlur={() => validateField('linkedin')} onChange={(e) => setData('linkedin', e.target.value)} placeholder={'...link on your Linkedin'} error={errors.linkedin}/>
-                                    </div>
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Telegram (not necessary)'/>
+                                    <Input className='my-2 w-full' name='telegram' value={data.telegram} onBlur={() => validateField('telegram')} onChange={(e) => setData('telegram', e.target.value)} placeholder={'...link on your Telegram'} error={errors.telegram}/>
                                 </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={secondStepDisabled}>
-                                        Next step
-                                    </PrimaryButton>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Linkedin (not necessary)'/>
+                                    <Input className='my-2 w-full' name='linkedin' value={data.linkedin} onBlur={() => validateField('linkedin')} onChange={(e) => setData('linkedin', e.target.value)} placeholder={'...link on your Linkedin'} error={errors.linkedin}/>
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 3 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Global information about your vacancy</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Experience years'/>
-                                        <Input className='my-2 w-full' name='experience' value={data.experience} onBlur={() => validateField('experience')} onChange={(e) => setData('experience', e.target.value)} placeholder={'Expectations based on experience...'} error={errors.experience}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Salary'/>
-                                        <Input className='my-2 w-full' name='salary' value={data.salary} onBlur={() => validateField('salary')} onChange={(e) => setData('salary', e.target.value)} placeholder={'Salary...'} error={errors.salary}/>
-                                    </div>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={secondStepDisabled}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 3 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Global information about your vacancy</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Experience years'/>
+                                    <Input className='my-2 w-full' name='experience' value={data.experience} onBlur={() => validateField('experience')} onChange={(e) => setData('experience', e.target.value)} placeholder={'Expectations based on experience...'} error={errors.experience}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Selector title='Attend' dataSelector={dataAttend} selected={selectedAttend} error={errors.attend} handleChange={handleAttendChange} />
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Selector title='Employment' dataSelector={dataEmployment} selected={selectedEmployment} error={errors.employment} handleChange={handleEmploymentChange} />
-                                    </div>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Salary'/>
+                                    <Input className='my-2 w-full' name='salary' value={data.salary} onBlur={() => validateField('salary')} onChange={(e) => setData('salary', e.target.value)} placeholder={'Salary...'} error={errors.salary}/>
                                 </div>
-                                <div className='mb-2'>
-                                    <Label title='Keywords' />
-                                    <TextArea name='keywords' value={data.keywords} placeholder='Workers can find your vacancy using these tips' onBlur={() => validateField('keywords')} onChange={(e) => setData('keywords', e.target.value)} error={errors.keywords}/>
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Selector title='Attend' dataSelector={dataAttend} selected={selectedAttend} error={errors.attend} handleChange={handleAttendChange} />
                                 </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={thirdStepDisabled}>
-                                        Next step
-                                    </PrimaryButton>
+                                <div className="mb-2 w-1/2">
+                                    <Selector title='Employment' dataSelector={dataEmployment} selected={selectedEmployment} error={errors.employment} handleChange={handleEmploymentChange} />
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 4 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Core information about your vacancy</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className="mb-2">
-                                    <label
-                                        className="block text-gray-700 underline font-bold mt-2"
-                                    >
-                                        Logo to 5 mb (not necessary)
-                                    </label>
-                                    <input
-                                        className={`my-2 shadow appearance-none border border-customColor rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                        id="logo"
-                                        name="logo"
-                                        type='file'
-                                        value={data.logo}
-                                        onChange={(e) => setData("logo", e.target.files[0])}
-                                        onBlur={() => validateField('logo')}
-                                    />
-                                    <InputError message={errors.logo} />
-                                </div>
-                                <div className='mb-2'>
-                                    <Label title='Description' />
-                                    <TextArea name='description' value={data.description} placeholder='A few sentences about vacancy' onBlur={() => validateField('description')} onChange={(e) => setData('description', e.target.value)} error={errors.description}/>
-                                </div>
-                                <div className='mb-2'>
-                                    <Label title='Demands' />
-                                    <TextArea name='demands' value={data.demands} placeholder='Knowledge requirements' onBlur={() => validateField('demands')} onChange={(e) => setData('demands', e.target.value)} error={errors.demands}/>
-                                </div>
-                                <div className='mb-2'>
-                                    <Label title='Details' />
-                                    <TextArea name='details' value={data.details} placeholder='All additional information' onBlur={() => validateField('details')} onChange={(e) => setData('details', e.target.value)} error={errors.details}/>
-                                </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className="mt-3 p-2" onClick={createVacancy} disabled={fourthStepDisabled}>
-                                        Publish
-                                    </PrimaryButton>
-                                </div>
-                            </section>
-                        )}
-                        </form>                            
-                    </div>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Keywords' />
+                                <TextArea name='keywords' value={data.keywords} placeholder='Workers can find your vacancy using these tips' onBlur={() => validateField('keywords')} onChange={(e) => setData('keywords', e.target.value)} error={errors.keywords}/>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={thirdStepDisabled}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 4 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Core information about your vacancy</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 underline font-bold mt-2"
+                                >
+                                    Logo to 5 mb (not necessary)
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border border-customColor rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="logo"
+                                    name="logo"
+                                    type='file'
+                                    onChange={(e) => setData("logo", e.target.files[0])}
+                                    onBlur={() => validateField('logo')}
+                                />
+                                <InputError message={errors.logo} />
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Description' />
+                                <TextArea name='description' value={data.description} placeholder='A few sentences about vacancy' onBlur={() => validateField('description')} onChange={(e) => setData('description', e.target.value)} error={errors.description}/>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Demands' />
+                                <TextArea name='demands' value={data.demands} placeholder='Knowledge requirements' onBlur={() => validateField('demands')} onChange={(e) => setData('demands', e.target.value)} error={errors.demands}/>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Details' />
+                                <TextArea name='details' value={data.details} placeholder='All additional information' onBlur={() => validateField('details')} onChange={(e) => setData('details', e.target.value)} error={errors.details}/>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className="mt-3 p-2" onClick={createVacancy} disabled={fourthStepDisabled}>
+                                    Publish
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    </form>                            
                 </div>
             </div>
         </AuthenticatedLayout>

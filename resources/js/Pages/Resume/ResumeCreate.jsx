@@ -83,7 +83,7 @@ export default function ResumeCreate({ auth, categories}) {
 
     const firstStepDisabled = !data.name || !data.surname || !data.city || !data.age || !data.gender;
     const secondStepDisabled = !data.number || !data.email;
-    const thirdStepDisabled = !data.category_id || !data.salary || !data    .experience || !data.attend || !data.employment || !data.keywords;
+    const thirdStepDisabled = !data.category_id || !data.salary || !data.experience || !data.attend || !data.employment || !data.keywords;
     const fourthStepDisabled = !data.bio || !data.opportunities || !data.background;
 
     const validateField = (fieldName) => {
@@ -232,182 +232,179 @@ export default function ResumeCreate({ auth, categories}) {
             <Head title="Creating resume" />
 
             <div className="py-12">
-                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <form 
-                            className="p-6 text-gray-900 flex flex-col"
-                        >
-                            <ProgressBar className={progress} />
+                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg max-w-4xl mx-auto sm:px-6 lg:px-8">
+                    <form 
+                        className="p-6 text-gray-900 flex flex-col"
+                    >
+                        <ProgressBar className={progress} />
 
-                        {currentStep === 1 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Information about yourself</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='Name'/>
-                                        <Input className='my-2 w-full' name='name' value={data.name} onBlur={() => validateField('name')} onChange={(e) => setData('name', e.target.value)} placeholder={'Enter your name...'} error={errors.name}/>
-                                    </div>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='Surname'/>
-                                        <Input className='my-2 w-full' name='surname' value={data.surname} onBlur={() => validateField('surname')} onChange={(e) => setData('surname', e.target.value)} placeholder={'Enter your surname...'} error={errors.surname}/>
-                                    </div>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='City'/>
-                                        <Input className='my-2 w-full' name='city' value={data.city} onBlur={() => validateField('city')} onChange={(e) => setData('city', e.target.value)} placeholder={'Enter your city...'} error={errors.city}/>
-                                    </div>
+                    {currentStep === 1 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Information about yourself</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='Name'/>
+                                    <Input className='my-2 w-full' name='name' value={data.name} onBlur={() => validateField('name')} onChange={(e) => setData('name', e.target.value)} placeholder={'Enter your name...'} error={errors.name}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/4">
-                                        <Label title='Age'/>
-                                        <Input className='my-2 w-full' name='age' value={data.age} onBlur={() => validateField('age')} onChange={(e) => setData('age', e.target.value)} placeholder={'Enter your age...'} error={errors.age}/>
-                                    </div>
-                                    <div className="mb-2 w-3/4">
-                                        <Selector title='Gender' dataSelector={dataGender} selected={selectedGender} error={errors.gender} handleChange={handleGenderChange} />
-                                    </div>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='Surname'/>
+                                    <Input className='my-2 w-full' name='surname' value={data.surname} onBlur={() => validateField('surname')} onChange={(e) => setData('surname', e.target.value)} placeholder={'Enter your surname...'} error={errors.surname}/>
                                 </div>
-                                <div className="flex justify-end">
-                                    <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={firstStepDisabled}>
-                                        Next step
-                                    </PrimaryButton>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='City'/>
+                                    <Input className='my-2 w-full' name='city' value={data.city} onBlur={() => validateField('city')} onChange={(e) => setData('city', e.target.value)} placeholder={'Enter your city...'} error={errors.city}/>
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 2 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Personal information (will be show only for employers)</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Number'/>
-                                        <Input className='my-2 w-full' name='number' value={data.number} onBlur={() => validateField('number')} onChange={(e) => setData('number', e.target.value)} placeholder={'Your number...'} error={errors.number}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Email'/>
-                                        <Input className='my-2 w-full' name='email' value={data.email} onBlur={() => validateField('email')} onChange={(e) => setData('email', e.target.value)} placeholder={'...link on your Email'} error={errors.email}/>
-                                    </div>
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/4">
+                                    <Label title='Age'/>
+                                    <Input className='my-2 w-full' name='age' value={data.age} onBlur={() => validateField('age')} onChange={(e) => setData('age', e.target.value)} placeholder={'Enter your age...'} error={errors.age}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='Telegram (not necessary)'/>
-                                        <Input className='my-2 w-full' name='telegram' value={data.telegram} onBlur={() => validateField('telegram')} onChange={(e) => setData('telegram', e.target.value)} placeholder={'...link on your Telegram'} error={errors.telegram}/>
-                                    </div>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='GitHub (not necessary)'/>
-                                        <Input className='my-2 w-full' name='github' value={data.github} onBlur={() => validateField('github')} onChange={(e) => setData('github', e.target.value)} placeholder={'...link on your GitHub'} error={errors.github}/>
-                                    </div>
-                                    <div className="mb-2 w-1/3">
-                                        <Label title='Linkedin (not necessary)'/>
-                                        <Input className='my-2 w-full' name='linkedin' value={data.linkedin} onBlur={() => validateField('linkedin')} onChange={(e) => setData('linkedin', e.target.value)} placeholder={'...link on your Linkedin'} error={errors.linkedin}/>
-                                    </div>
+                                <div className="mb-2 w-3/4">
+                                    <Selector title='Gender' dataSelector={dataGender} selected={selectedGender} error={errors.gender} handleChange={handleGenderChange} />
                                 </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={secondStepDisabled}>
-                                        Next step
-                                    </PrimaryButton>
+                            </div>
+                            <div className="flex justify-end">
+                                <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={firstStepDisabled}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 2 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Personal information (will be show only for employers)</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Number'/>
+                                    <Input className='my-2 w-full' name='number' value={data.number} onBlur={() => validateField('number')} onChange={(e) => setData('number', e.target.value)} placeholder={'Your number...'} error={errors.number}/>
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 3 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Global information about your resume</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className="mb-2">
-                                    <Label title='Category'/>
-                                    <select
-                                        className={`shadow my-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  ${errors.category_id ? 'border-2 border-red-500' : ''}`}
-                                        id="category_id"
-                                        name="category_id"
-                                        value={data.category_id}
-                                        onChange={(e) => setData('category_id', e.target.value)}
-                                    >
-                                        <option value="">Select a category</option>
-                                        {categories.map((category) => (
-                                            <option key={category.id} value={category.id}>{ category.title }</option>
-                                        ))}
-                                    </select>
-                                    <InputError message={errors.category_id} />
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Email'/>
+                                    <Input className='my-2 w-full' name='email' value={data.email} onBlur={() => validateField('email')} onChange={(e) => setData('email', e.target.value)} placeholder={'...link on your Email'} error={errors.email}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Experience years'/>
-                                        <Input className='my-2 w-full' name='experience' value={data.experience} onBlur={() => validateField('experience')} onChange={(e) => setData('experience', e.target.value)} placeholder={'How much years u worked?'} error={errors.experience}/>
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Label title='Salary (only employers will see)'/>
-                                        <Input className='my-2 w-full' name='salary' value={data.salary} onBlur={() => validateField('salary')} onChange={(e) => setData('salary', e.target.value)} placeholder={'Salary expectations'} error={errors.salary}/>
-                                    </div>
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='Telegram (not necessary)'/>
+                                    <Input className='my-2 w-full' name='telegram' value={data.telegram} onBlur={() => validateField('telegram')} onChange={(e) => setData('telegram', e.target.value)} placeholder={'...link on your Telegram'} error={errors.telegram}/>
                                 </div>
-                                <div className='flex gap-6'>
-                                    <div className="mb-2 w-1/2">
-                                        <Selector title='Attend' dataSelector={dataAttend} selected={selectedAttend} error={errors.attend} handleChange={handleAttendChange} />
-                                    </div>
-                                    <div className="mb-2 w-1/2">
-                                        <Selector title='Employment' dataSelector={dataEmployment} selected={selectedEmployment} error={errors.employment} handleChange={handleEmploymentChange} />
-                                    </div>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='GitHub (not necessary)'/>
+                                    <Input className='my-2 w-full' name='github' value={data.github} onBlur={() => validateField('github')} onChange={(e) => setData('github', e.target.value)} placeholder={'...link on your GitHub'} error={errors.github}/>
                                 </div>
-                                <div className='mb-2'>
-                                    <Label title='Keywords' />
-                                    <TextArea name='keywords' value={data.keywords} placeholder='Employers can find you using these tips' onBlur={() => validateField('keywords')} onChange={(e) => setData('keywords', e.target.value)} error={errors.keywords}/>
+                                <div className="mb-2 w-1/3">
+                                    <Label title='Linkedin (not necessary)'/>
+                                    <Input className='my-2 w-full' name='linkedin' value={data.linkedin} onBlur={() => validateField('linkedin')} onChange={(e) => setData('linkedin', e.target.value)} placeholder={'...link on your Linkedin'} error={errors.linkedin}/>
                                 </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={thirdStepDisabled}>
-                                        Next step
-                                    </PrimaryButton>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={secondStepDisabled}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 3 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Global information about your resume</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className="mb-2">
+                                <Label title='Category'/>
+                                <select
+                                    className={`shadow my-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  ${errors.category_id ? 'border-2 border-red-500' : ''}`}
+                                    id="category_id"
+                                    name="category_id"
+                                    value={data.category_id}
+                                    onChange={(e) => setData('category_id', e.target.value)}
+                                >
+                                    <option value="">Select a category</option>
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.id}>{ category.title }</option>
+                                    ))}
+                                </select>
+                                <InputError message={errors.category_id} />
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Experience years'/>
+                                    <Input className='my-2 w-full' name='experience' value={data.experience} onBlur={() => validateField('experience')} onChange={(e) => setData('experience', e.target.value)} placeholder={'How much years u worked?'} error={errors.experience}/>
                                 </div>
-                            </section>
-                        )}
-                        {currentStep === 4 && (
-                            <section className='mt-2'>
-                                <h2 className='text-xl font-bold mb-4 text-center'>Core information about your resume</h2>
-                                <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
-                                <div className="mb-2">
-                                    <label
-                                        className="block text-gray-700 underline font-bold mt-2"
-                                    >
-                                        Image to 5 mb(not necessary)
-                                    </label>
-                                    <input
-                                        className={`my-2 shadow appearance-none border border-customColor rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                                        id="image"
-                                        name="image"
-                                        type='file'
-                                        value={data.image}
-                                        onChange={(e) => setData("image", e.target.files[0])}
-                                        onBlur={() => validateField('image')}
-                                    />
-                                    <InputError message={errors.image} />
+                                <div className="mb-2 w-1/2">
+                                    <Label title='Salary (only employers will see)'/>
+                                    <Input className='my-2 w-full' name='salary' value={data.salary} onBlur={() => validateField('salary')} onChange={(e) => setData('salary', e.target.value)} placeholder={'Salary expectations'} error={errors.salary}/>
                                 </div>
-                                <div className='mb-2'>
-                                    <Label title='BIO' />
-                                    <TextArea name='bio' value={data.bio} placeholder='A few sentences about yourself' onBlur={() => validateField('bio')} onChange={(e) => setData('bio', e.target.value)} error={errors.bio}/>
+                            </div>
+                            <div className='flex gap-6'>
+                                <div className="mb-2 w-1/2">
+                                    <Selector title='Attend' dataSelector={dataAttend} selected={selectedAttend} error={errors.attend} handleChange={handleAttendChange} />
                                 </div>
-                                <div className='mb-2'>
-                                    <Label title='Opportunities' />
-                                    <TextArea name='opportunities' value={data.opportunities} placeholder='Your skils' onBlur={() => validateField('opportunities')} onChange={(e) => setData('opportunities', e.target.value)} error={errors.opportunities}/>
+                                <div className="mb-2 w-1/2">
+                                    <Selector title='Employment' dataSelector={dataEmployment} selected={selectedEmployment} error={errors.employment} handleChange={handleEmploymentChange} />
                                 </div>
-                                <div className='mb-2'>
-                                    <Label title='Background' />
-                                    <TextArea name='background' value={data.background} placeholder='All about your background' onBlur={() => validateField('background')} onChange={(e) => setData('background', e.target.value)} error={errors.background}/>
-                                </div>
-                                <div className="flex justify-between">
-                                    <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
-                                        Come back
-                                    </DangerButton>
-                                    <PrimaryButton className="mt-3 p-2" onClick={createResume} disabled={fourthStepDisabled}>
-                                        Publish
-                                    </PrimaryButton>
-                                </div>
-                            </section>
-                        )}
-                        </form>                            
-                    </div>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Keywords' />
+                                <TextArea name='keywords' value={data.keywords} placeholder='Employers can find you using these tips' onBlur={() => validateField('keywords')} onChange={(e) => setData('keywords', e.target.value)} error={errors.keywords}/>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className='mt-3 p-2' onClick={handleNextStep} disabled={thirdStepDisabled}>
+                                    Next step
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    {currentStep === 4 && (
+                        <section className='mt-2'>
+                            <h2 className='text-xl font-bold mb-4 text-center'>Core information about your resume</h2>
+                            <p className='text-sm text-red-500  font-bold mb-2 text-center'>{currentError}</p>
+                            <div className="mb-2">
+                                <label
+                                    className="block text-gray-700 underline font-bold mt-2"
+                                >
+                                    Image to 5 mb(not necessary)
+                                </label>
+                                <input
+                                    className={`my-2 shadow appearance-none border border-customColor rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                                    id="image"
+                                    name="image"
+                                    type='file'
+                                    onChange={(e) => setData("image", e.target.files[0])}
+                                    onBlur={() => validateField('image')}
+                                />
+                                <InputError message={errors.image} />
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='BIO' />
+                                <TextArea name='bio' value={data.bio} placeholder='A few sentences about yourself' onBlur={() => validateField('bio')} onChange={(e) => setData('bio', e.target.value)} error={errors.bio}/>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Opportunities' />
+                                <TextArea name='opportunities' value={data.opportunities} placeholder='Your skils' onBlur={() => validateField('opportunities')} onChange={(e) => setData('opportunities', e.target.value)} error={errors.opportunities}/>
+                            </div>
+                            <div className='mb-2'>
+                                <Label title='Background' />
+                                <TextArea name='background' value={data.background} placeholder='All about your background' onBlur={() => validateField('background')} onChange={(e) => setData('background', e.target.value)} error={errors.background}/>
+                            </div>
+                            <div className="flex justify-between">
+                                <DangerButton className='mt-3 p-2' onClick={handlePrevStep}>
+                                    Come back
+                                </DangerButton>
+                                <PrimaryButton className="mt-3 p-2" onClick={createResume} disabled={fourthStepDisabled}>
+                                    Publish
+                                </PrimaryButton>
+                            </div>
+                        </section>
+                    )}
+                    </form>                            
                 </div>
             </div>
         </AuthenticatedLayout>

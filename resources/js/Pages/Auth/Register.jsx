@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
+import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import Selector from '@/Components/Selector';
@@ -52,12 +52,13 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <Selector title='Mode' dataSelector={dataMode} selected={selectedMode} handleChange={handleModeChange}/>
+                    <Label title="Mode" />
+                    <Selector title='' dataSelector={dataMode} selected={selectedMode} handleChange={handleModeChange}/>
                     <InputError message={errors.mode} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <Label title="Name" />
 
                     <TextInput
                         id="name"
@@ -74,7 +75,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="surname" value="Surname" />
+                    <Label title="Surname" />
 
                     <TextInput
                         id="surname"
@@ -91,7 +92,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <Label title="Email" />
 
                     <TextInput
                         id="email"
@@ -113,7 +114,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <Label title="Password" />
 
                     <TextInput
                         id="password"
@@ -130,7 +131,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                    <Label title="Confirm Password" />
 
                     <TextInput
                         id="password_confirmation"

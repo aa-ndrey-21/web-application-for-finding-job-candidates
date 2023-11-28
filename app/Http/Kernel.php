@@ -66,7 +66,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'checkVacancyOwnership' => \App\Http\Middleware\CheckVacancyOwnership::class,
-        'checkResumeOwnership' => \App\Http\Middleware\checkResumeOwnership::class,
+        'vacancy.ownership' => \App\Http\Middleware\CheckVacancyOwnership::class,
+        'resume.ownership' => \App\Http\Middleware\checkResumeOwnership::class,
+        'mode' => \App\Http\Middleware\CheckUserMode::class,
     ];
 }
