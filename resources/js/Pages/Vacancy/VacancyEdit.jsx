@@ -3,7 +3,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Selector from '@/Components/Selector';
-import EditInput from '@/Components/EditInput';
+import Input from '@/Components/Input';
 import TextArea from '@/Components/TextArea';
 import city from '../../../../public/image/city.png';
 import edit from '../../../../public/image/edit.png';
@@ -142,9 +142,9 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
                                         </select>
                                     </div>
                                     <ul className='flex gap-6'>
-                                        <EditInput className='w-26 text-lg font-bold' name='name' value={data.name} error={errors.name} onChange={(e) => setData('name', e.target.value)} />
+                                        <Input className='w-26 text-lg font-bold' name='name' value={data.name} error={errors.name} onChange={(e) => setData('name', e.target.value)} />
                                         <li className='text-lg flex items-center'>
-                                            <EditInput className='w-24' name='city' value={data.city} error={errors.city} onChange={(e) => setData('city', e.target.value)} />
+                                            <Input className='w-24' name='city' value={data.city} error={errors.city} onChange={(e) => setData('city', e.target.value)} />
                                             <img className='inline-block h-6 w-6 ml-2' src={city} alt="" />
                                         </li> 
                                     </ul>
@@ -160,7 +160,7 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
                                             <Selector dataSelector={dataAttend} selected={selectedAttend} error={errors.attend} handleChange={handleAttendChange} />
                                         </li>
                                         <li className='text-lg flex items-center'><span className='font-bold mr-2'>Years experience</span><span className='mr-1'>-</span> 
-                                            <EditInput className='w-16' name='experience' value={data.experience} error={errors.experience} onChange={(e) => setData('experience', e.target.value)} />
+                                            <Input className='w-16' name='experience' value={data.experience} error={errors.experience} onChange={(e) => setData('experience', e.target.value)} />
                                         </li>
                                     </ul>
                                 </div>
@@ -201,25 +201,25 @@ export default function VacancyCreate({ auth, categories, vacancy}) {
                                 <h3 className='text-lg font-bold'>Details information (shown only for employer):</h3>
                                 <ul className='flex gap-6'>
                                     <li className='text-lg flex items-center'><span className='font-bold mr-1'>Salary expectations -</span>
-                                        <EditInput className='w-16' name='salary' value={data.salary} error={errors.salary} onChange={(e) => setData('salary', e.target.value)} />
+                                        <Input className='w-16' name='salary' value={data.salary} error={errors.salary} onChange={(e) => setData('salary', e.target.value)} />
                                         <span className='ml-1'>$</span>
                                     </li>
                                     <li className='text-lg flex items-center'><span className='font-bold mr-1'>Email -</span>
-                                        <EditInput className='w-18' name='email' value={data.email} error={errors.email} onChange={(e) => setData('email', e.target.value)} />
+                                        <Input className='w-18' name='email' value={data.email} error={errors.email} onChange={(e) => setData('email', e.target.value)} />
                                     </li>
                                     <li className='text-lg flex items-center'><span className='font-bold mr-1'>Number -</span>
-                                        <EditInput className='w-18' name='number' value={data.number} error={errors.number} onChange={(e) => setData('number', e.target.value)} />
+                                        <Input className='w-18' name='number' value={data.number} error={errors.number} onChange={(e) => setData('number', e.target.value)} />
                                     </li>
                                 </ul>
                                 <h3 className='text-lg font-bold'>Social media:</h3>
                                     <ul className='flex gap-6 text-center justify-center items-center'>
                                         <li className='text-lg'>
-                                            <EditInput className='w-18' name='telegram' value={data.telegram} error={errors.telegram} onChange={(e) => setData('telegram', e.target.value)} placeholder='...link on your Telegram' />
+                                            <Input className='w-18' name='telegram' value={data.telegram} error={errors.telegram} onChange={(e) => setData('telegram', e.target.value)} placeholder='...link on your Telegram' />
                                             <img className='inline-block h-6 w-6 cursor-pointer ml-1' src={telegram} alt="" />
                                         </li>
 
                                         <li className='text-lg'>
-                                            <EditInput className='w-18' name='linkedin' value={data.linkedin} error={errors.linkedin} onChange={(e) => setData('linkedin', e.target.value)} placeholder='...link on your Linkedin' />
+                                            <Input className='w-18' name='linkedin' value={data.linkedin} error={errors.linkedin} onChange={(e) => setData('linkedin', e.target.value)} placeholder='...link on your Linkedin' />
                                             <img className='inline-block h-6 w-6 cursor-pointer ml-1' src={linkedin} alt="" />
                                         </li>
                                     </ul>

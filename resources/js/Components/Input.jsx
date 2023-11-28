@@ -1,5 +1,5 @@
 
-export default function EditInput({ className = '', name, value, onChange, placeholder, error }) {
+export default function Input({ className = '', name, value, onChange, onBlur, placeholder, error }) {
 
   return (
     <>
@@ -10,6 +10,7 @@ export default function EditInput({ className = '', name, value, onChange, place
         value={value}  
         placeholder={placeholder} 
         onChange={onChange} 
+        onBlur={onBlur}
       />
     </>
   );

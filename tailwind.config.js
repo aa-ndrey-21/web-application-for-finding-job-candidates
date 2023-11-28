@@ -24,6 +24,9 @@ export default {
                 greenColor700: '#2a3327',
                 
             },
+            animation: {
+                wiggle: 'wiggle 1s ease-in-out infinite',
+            },
         },
     },
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function TextArea({  className = '', name, value, onChange, error }) {
+export default function TextArea({  className = '', name, value, onChange, error, onBlur, placeholder }) {
   const [rows, setRows] = useState(2);
 
   useEffect(() => {
@@ -19,7 +19,9 @@ export default function TextArea({  className = '', name, value, onChange, error
         name={name}
         value={value}
         onChange={onChange}
-        rows={rows} 
+        onBlur={onBlur}
+        placeholder={placeholder}
+        rows={Math.max(rows, 3)}
       />
     </>
   );
