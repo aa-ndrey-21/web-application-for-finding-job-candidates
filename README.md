@@ -40,8 +40,7 @@ php artisan migrate --seed
 ```
 8. Build application
 ```
-PHP artisan serve --host=(your_localhost) --port=(port)
-npm run dev -- --host=(your_localhost)
+npm run build
 ```
 9. Run server (together)
 ```

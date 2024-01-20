@@ -26,20 +26,20 @@ Route::middleware('auth')->group(function () {
     Route::middleware('mode:worker')->group(function () {
         Route::get('/resume/create', [ResumeController::class, 'create'])->name('resume.create');
         Route::post('/resume/create', [ResumeController::class, 'store'])->name('resume.store');
-        Route::get('/resume/{resume}', [ResumeController::class, 'show'])->name('resume.show');
         Route::middleware('resume.ownership')->group(function () {
             Route::get('/resume/{resume}/edit', [ResumeController::class, 'edit'])->name('resume.edit');
         });
         Route::patch('/resume/{resume}', [ResumeController::class, 'update'])->name('resume.update');
         Route::delete('/resume/{resume}', [ResumeController::class, 'destroy'])->name('resume.destroy');
     });
+    Route::get('/resume/{resume}', [ResumeController::class, 'show'])->name('resume.show');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/vacancy', [VacancyController::class, 'index'])->name('vacancy.index');
+    Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
     Route::middleware('mode:employer')->group(function () {
         Route::get('/vacancy/create', [VacancyController::class, 'create'])->name('vacancy.create');    
         Route::post('/vacancy/create', [VacancyController::class, 'store'])->name('vacancy.store');
-        Route::get('/vacancy/{vacancy}', [VacancyController::class, 'show'])->name('vacancy.show');
         Route::middleware('vacancy.ownership')->group(function () {
             Route::get('/vacancy/{vacancy}/edit', [VacancyController::class, 'edit'])->name('vacancy.edit');
         });
